@@ -4,13 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.jindalfresh.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/Home_LinearLayout_id"
+    <ListView
+        android:id="@+id/home_listView_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:layout_height="match_parent"></ListView>
 
 
 </FrameLayout>
