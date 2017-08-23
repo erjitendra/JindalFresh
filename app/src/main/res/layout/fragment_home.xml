@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.jindalfresh.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/Home_LinearLayout_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home"
-        android:gravity="center"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        />
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 
 </FrameLayout>
