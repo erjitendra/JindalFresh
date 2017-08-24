@@ -27,14 +27,8 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        ArrayList<Search_Items> earthquakes = new ArrayList<>();
-        earthquakes.add(new Search_Items("7.2", "San Francisco", "Feb 2, 2016"));
-        earthquakes.add(new Search_Items("6.1", "London", "July 20, 2015"));
-        earthquakes.add(new Search_Items("3.9", "Tokyo", "Nov 10, 2014"));
-        earthquakes.add(new Search_Items("5.4", "Mexico City", "May 3, 2014"));
-        earthquakes.add(new Search_Items("2.8", "Moscow", "Jan 31, 2013"));
-        earthquakes.add(new Search_Items("4.9", "Rio de Janeiro", "Aug 19, 2012"));
-        earthquakes.add(new Search_Items("1.6", "Paris", "Oct 30, 2011"));
+        ArrayList<Search_Items> earthquakes = QueryUtils.extractEarthquakes();
+
 
         // Find a reference to the {@link ListView} in the layout
 
