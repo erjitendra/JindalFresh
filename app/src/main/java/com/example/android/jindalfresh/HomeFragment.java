@@ -30,15 +30,15 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Home_Items> words = new ArrayList<Home_Items>();
 
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
-        words.add(new Home_Items(R.drawable.ic_home_black_24dp, "Home"));
+        words.add(new Home_Items(R.drawable.coriander___dhania, "Dhaniya"));
+        words.add(new Home_Items(R.drawable.cucumber___kakdi_500, "Kakdi"));
+        words.add(new Home_Items(R.drawable.mango_totapuri, "Mango Totapuri"));
+        words.add(new Home_Items(R.drawable.mint_leaves___pudina, "Pudina"));
+        words.add(new Home_Items(R.drawable.onion___kanda_1_kg, "Onion"));
+        words.add(new Home_Items(R.drawable.raddish___mooli, "Mooli"));
+        words.add(new Home_Items(R.drawable.papaya_700_gm_to_900, "Papaya"));
+        words.add(new Home_Items(R.drawable.watermelon_big___bad, "watermelon"));
+        words.add(new Home_Items(R.drawable.strawberry_box_200, "Strawberry"));
 
 
 //        Log.v("NumbersActivity", "Word at index 0: " + words.get(0));

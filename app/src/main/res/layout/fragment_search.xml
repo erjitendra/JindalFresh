@@ -5,13 +5,9 @@
     tools:context="com.example.android.jindalfresh.SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/search_listView_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Search"
-        android:gravity="center"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        />
+        android:layout_height="match_parent"></ListView>
 
 </FrameLayout>
