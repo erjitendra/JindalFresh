@@ -1,6 +1,5 @@
 package com.example.android.jindalfresh;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,8 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setToolBar();
         fragmentStart();
         setUpNavigation();
-
-        String productsUrl = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
-
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(productsUrl);
-
 
     }
 
@@ -130,38 +121,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"You select Setting",Toast.LENGTH_LONG).show();
         }
         return true;
-    }
-
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, String> {
-
-        /**
-         * This method is invoked (or called) on a background thread, so we can perform
-         * long-running operations like making a network request.
-         * <p>
-         * It is NOT okay to update the UI from a background thread, so we just return an
-         */
-        protected String doInBackground(String... urls) {
-            // Don't perform the request if there are no URLs, or the first URL is null.
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-            ProductResponseHandler p = new ProductResponseHandler();
-            String response = p.getProductJsonData(urls[0]);
-            ArrayList<Product> resultProductArray = p.getProductArray(response);
-            return response;
-        }
-
-        /**
-         * This method is invoked on the main UI thread after the background work has been
-         * completed.
-         * (which was returned from the doInBackground() method) and update the views on the screen.
-         */
-        protected void onPostExecute(String result) {
-            // If there is no result, do nothing.
-
-
-        }
     }
     // ====================================================
 }
