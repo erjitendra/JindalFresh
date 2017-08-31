@@ -35,11 +35,20 @@ public class SearchFragment extends Fragment {
 
         // Create a new {@link ArrayAdapter} of earthquakes
         Search_Items_Adapter adapter = new Search_Items_Adapter(getContext(), earthquakes);
-        ListView earthquakeListView = (ListView) rootView.findViewById(R.id.search_listView_id);
+        final ListView earthquakeListView = (ListView) rootView.findViewById(R.id.search_listView_id);
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
+
+//        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            Log.v("ABCD","Position Is"+earthquakeListView.getItemAtPosition(position)) ;
+//            }
+//        });
         return rootView;
+
     }
+
 
 }
