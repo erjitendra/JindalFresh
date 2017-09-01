@@ -92,10 +92,10 @@ public class HomeFragment extends Fragment {
             Home_Items_Adapter arrayAdapter = new Home_Items_Adapter(getContext(), resultProductArray);
             ListView listView = (ListView) rootView.findViewById(R.id.home_listView_id);
             listView.setAdapter(arrayAdapter);
-            Log.v("mumbai", "At The Do in  End post Method");
+            Log.v("mumbai", "At The Do in  End post Method" + listView);
+
+
         }
-
-
     }
 
 
