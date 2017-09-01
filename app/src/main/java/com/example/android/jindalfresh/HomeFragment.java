@@ -52,14 +52,14 @@ public class HomeFragment extends Fragment {
 
         String productsUrl = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
 
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        ProductAsyncTask task = new ProductAsyncTask();
         task.execute(productsUrl);
 
         return rootView;
 
     }
 
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, String> {
+    private class ProductAsyncTask extends AsyncTask<String, Void, String> {
 
         /**
          * This method is invoked (or called) on a background thread, so we can perform
@@ -94,6 +94,9 @@ public class HomeFragment extends Fragment {
             listView.setAdapter(arrayAdapter);
             Log.v("mumbai", "At The Do in  End post Method");
         }
+
+
     }
+
 
 }
