@@ -13,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.android.jindalfresh.product.movieModel;
+
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -21,11 +23,14 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toast.makeText(getApplicationContext(), "Testing package", Toast.LENGTH_LONG).show();
+        int test = new movieModel().getI();
+        Toast.makeText(getApplicationContext(), "Success packg" + test, Toast.LENGTH_LONG).show();
 
         setToolBar();
         fragmentStart();
