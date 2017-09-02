@@ -6,21 +6,21 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/imageRec"
+        android:id="@+id/productImageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:scaleType="fitXY" />
 
     <LinearLayout
-        android:id="@+id/linearRecView"
+        android:id="@+id/linearlayout2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewHeading"
+            android:id="@+id/textViewEngName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDesc"
+            android:id="@+id/textViewHindiName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/Total"
-                android:text="50kg"
+
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/Price"
-                android:text="300"
+
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -103,7 +103,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/increment"
+                android:id="@+id/btn_Increment"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,14 +111,14 @@
                 android:textSize="22sp" />
 
             <TextView
-                android:id="@+id/Quantity"
+                android:id="@+id/tv_Quantity"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="22sp" />
 
             <Button
-                android:id="@+id/decrement"
+                android:id="@+id/btn_Decrement"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -127,7 +127,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/add_btn"
+            android:id="@+id/btn_AddToCart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
