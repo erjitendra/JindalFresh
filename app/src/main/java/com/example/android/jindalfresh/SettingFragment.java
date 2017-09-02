@@ -31,6 +31,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class SettingFragment extends Fragment {
+
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;

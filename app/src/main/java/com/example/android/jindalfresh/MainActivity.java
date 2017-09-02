@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.android.jindalfresh.activities.home.HomeFragment;
 import com.example.android.jindalfresh.product.movieModel;
 
 public class MainActivity extends AppCompatActivity {

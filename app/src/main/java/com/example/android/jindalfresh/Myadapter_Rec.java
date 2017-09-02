@@ -63,7 +63,7 @@ public class Myadapter_Rec extends RecyclerView.Adapter<Myadapter_Rec.ViewHolder
         return listItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewHead;
         public TextView textViewDesc;
         public ImageView imageView;
@@ -80,23 +80,6 @@ public class Myadapter_Rec extends RecyclerView.Adapter<Myadapter_Rec.ViewHolder
             quantity = (TextView) itemView.findViewById(R.id.Quantity);
             increment = (Button) itemView.findViewById(R.id.increment);
             Log.v("Jit", "Hi" + imageView);
-        }
-
-        @Override
-        public void onClick(View v) {
-//            int position=getAdapterPosition();
-//            //Log.v("dheere"ASDF"+position);
-//            Log.v("ERT","ASDF"+position);
-//            Log.v("shyam","ASDF"+v.getId());
-//
-//            switch ((v.getId()))
-//            {
-//                case R.id.increment:
-//                    quantity.setText("HI");
-//                    Log.v("ram","ASDF");
-//
-//            }
-
         }
     }
 }
