@@ -2,6 +2,7 @@ package com.example.android.jindalfresh.app_activities.home;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.cart.CartItemHandler;
+import com.example.android.jindalfresh.cart.CartItemView;
 import com.example.android.jindalfresh.product.Product;
 
 import org.json.JSONArray;
@@ -35,6 +39,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
+    public Button buttonSubmit;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Product> listItems;
@@ -53,8 +58,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();
-        //*******************************************
 
+        //*******************************************
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading Data....");
         progressDialog.show();
@@ -70,14 +75,16 @@ public class HomeFragment extends Fragment {
                             for (int index = 0; index <= productArray.length(); index++) {
                                 JSONObject productObject = productArray.getJSONObject(index);
 
-                                Product listItem = new Product(
-                                        productObject.getString("name"),
-                                        productObject.getString("hindi_name"),
-                                        "http://lit-dusk-68336.herokuapp.com" + productObject.getString("image_path"));
-                                listItems.add(listItem);
-                                Log.v("PQR", "Hi" + productObject.getString("image_path"));
+                                Product productItem = new Product();
 
+                                productItem.setEngName(productObject.getString("name"));
+                                productItem.setHindiName(productObject.getString("hindi_name"));
+                                productItem.setImageUrl(productObject.getString("image_path"));
+                                productItem.setRate(productObject.getInt("rate"));
+                                productItem.setUnit(productObject.getString("unit"));
+                                productItem.setDefaultQuantity();
 
+                                listItems.add(productItem);
                             }
 
 
@@ -99,6 +106,19 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
 
+
+        Button btn = (Button) rootView.findViewById(R.id.btn_submit);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent in = new Intent(getActivity(), CartItemView.class);
+                CartItemHandler cartItemHandler = ProductAdapter.getCartItemHandlerFromAdaptor();
+                in.putExtra("cartHandlerObject", cartItemHandler);
+                Toast.makeText(getContext(), "BEFORE" + cartItemHandler.getCartsize(), Toast.LENGTH_LONG).show();
+                startActivity(in);
+            }
+        });
         return rootView;
     }
 

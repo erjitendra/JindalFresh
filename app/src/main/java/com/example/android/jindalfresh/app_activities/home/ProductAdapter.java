@@ -9,21 +9,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.cart.CartItemHandler;
 import com.example.android.jindalfresh.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    public static CartItemHandler cartItemHanlder = new CartItemHandler();
     private List<Product> listItems;
     private Context context;
 
     public ProductAdapter(List<Product> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
+
     }
+
+    public static CartItemHandler getCartItemHandlerFromAdaptor() {
+
+        return cartItemHanlder;
+    }
+
 
 
     @Override
@@ -40,16 +50,52 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());
         holder.textViewQuantity.setText(Integer.toString(listItem.getTotalQuantity()));
+        holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
         Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
+
+        String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
+        holder.textViewTotalQuantity.setText(totalQuantityDetail);
+        holder.buttonAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (!cartItemHanlder.CheckProductInCart(listItem)) {
+                    holder.buttonAddToCart.setText("Added");
+                    cartItemHanlder.setProducts(listItem);
+
+                    Toast.makeText(context, "New CartSize:" + cartItemHanlder.getCartsize(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Already Added", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         holder.buttonIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
-                listItem.setTotalQuantity(listItem.getTotalQuantity() + 1);
+                listItem.doIncrement();
                 notifyItemChanged(position);
             }
         });
+        holder.buttonDecrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
+                listItem.doDecrement();
+                notifyItemChanged(position);
+            }
+        });
+//        holder.buttonSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               Intent in = new Intent(context, CartItems.class);
+//                context.startActivity(in);
+//                notifyItemChanged(position);
+//            }
+//        });
+
 
     }
 
@@ -65,6 +111,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ImageView imageView;
         public TextView textViewQuantity;
         public Button buttonIncrement;
+        public Button buttonDecrement;
+        public Button buttonAddToCart;
+        public TextView textViewPrice;
+        public TextView textViewTotalQuantity;
+        public Button buttonSubmit;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,8 +123,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             textViewEngName = (TextView) itemView.findViewById(R.id.textViewEngName);
             imageView = (ImageView) itemView.findViewById(R.id.productImageView);
             textViewQuantity = (TextView) itemView.findViewById(R.id.tv_Quantity);
+            textViewPrice = (TextView) itemView.findViewById(R.id.TotalPrice);
+            textViewTotalQuantity = (TextView) itemView.findViewById(R.id.TotalQuantity);
             buttonIncrement = (Button) itemView.findViewById(R.id.btn_Increment);
+            buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
+            buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
+            buttonSubmit = (Button) itemView.findViewById(R.id.btn_submit);
+
+
 
         }
+
+
     }
 }

@@ -45,7 +45,7 @@
                 android:id="@+id/Total"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Total"
+                android:text="Total "
                 android:textStyle="bold" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:id="@+id/Price"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Price"
+                android:text="Price "
                 android:textStyle="bold" />
 
             <TextView
@@ -107,6 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="+"
                 android:textSize="22sp" />
 
@@ -115,6 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:textSize="22sp" />
 
             <Button
@@ -122,6 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="-"
                 android:textSize="22sp" />
         </LinearLayout>
