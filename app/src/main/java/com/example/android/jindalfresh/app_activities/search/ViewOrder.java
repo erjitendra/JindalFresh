@@ -4,7 +4,7 @@ package com.example.android.jindalfresh.app_activities.search;
  * Created by Jindal on 9/3/2017.
  */
 
-public class SearchProduct {
+public class ViewOrder {
 
     private String ToatlQuantity;
     private String ToatlPrice;

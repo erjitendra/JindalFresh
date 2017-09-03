@@ -27,13 +27,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class SearchFragment extends Fragment {
+public class ViewOrderFragment extends Fragment {
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
-    private ArrayList<SearchProduct> listItems = new ArrayList<>();
+    private ArrayList<ViewOrder> listItems = new ArrayList<>();
 
-    public SearchFragment() {
+    public ViewOrderFragment() {
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SearchFragment extends Fragment {
                             for (int index = 0; index <= productArray.length(); index++) {
                                 JSONObject productObject = productArray.getJSONObject(index);
 
-                                SearchProduct productItem = new SearchProduct();
+                                ViewOrder productItem = new ViewOrder();
 
                                 productItem.setDate(productObject.getString("date_time"));
                                 productItem.setToatlPrice(productObject.getString("total_price"));
@@ -73,7 +73,7 @@ public class SearchFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        adapter = new SearchAdapter(listItems, getContext());
+                        adapter = new ViewOrdersAdapter(listItems, getContext());
                         recyclerView.setAdapter(adapter);
                         Log.v("XYZ", "Hi" + recyclerView);
                     }

@@ -13,12 +13,12 @@ import com.example.android.jindalfresh.R;
 import java.util.List;
 
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
+public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.ViewHolder> {
 
-    private List<SearchProduct> listItems;
+    private List<ViewOrder> listItems;
     private Context context;
 
-    public SearchAdapter(List<SearchProduct> listItems, Context context) {
+    public ViewOrdersAdapter(List<ViewOrder> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
         Log.v("PQRS", "HIIIIII" + listItems.size());
@@ -27,15 +27,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
 
     @Override
-    public SearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewOrdersAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_view, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final SearchAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewOrdersAdapter.ViewHolder holder, final int position) {
 
-        final SearchProduct listItem = listItems.get(position);
+        final ViewOrder listItem = listItems.get(position);
         Log.v("PQRS", "HIIIIII" + listItems.get(position));
 
         holder.orderView_textViewOrderDate.setText(listItem.getDate());

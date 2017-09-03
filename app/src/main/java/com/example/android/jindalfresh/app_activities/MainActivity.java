@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
-import com.example.android.jindalfresh.app_activities.search.SearchFragment;
+import com.example.android.jindalfresh.app_activities.search.ViewOrderFragment;
 import com.example.android.jindalfresh.app_activities.settings.SettingFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.search:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new SearchFragment());
+                        fragmentTransaction.replace(R.id.frame_layout, new ViewOrderFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Search");
                         item.setChecked(true);
