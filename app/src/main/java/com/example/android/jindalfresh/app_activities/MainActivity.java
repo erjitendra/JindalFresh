@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
-import com.example.android.jindalfresh.app_activities.search.ViewOrderFragment;
 import com.example.android.jindalfresh.app_activities.settings.SettingFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
+import com.example.android.jindalfresh.app_activities.viewOrder.ViewOrderFragment;
 
 public class MainActivity extends AppCompatActivity {
 

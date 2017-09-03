@@ -1,4 +1,4 @@
-package com.example.android.jindalfresh.app_activities.search;
+package com.example.android.jindalfresh.app_activities.viewOrder;
 
 
 import android.app.ProgressDialog;
@@ -31,7 +31,7 @@ public class ViewOrderFragment extends Fragment {
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
-    private ArrayList<ViewOrder> listItems = new ArrayList<>();
+    private ArrayList<ViewOrderGetter> listItems = new ArrayList<>();
 
     public ViewOrderFragment() {
     }
@@ -60,7 +60,7 @@ public class ViewOrderFragment extends Fragment {
                             for (int index = 0; index <= productArray.length(); index++) {
                                 JSONObject productObject = productArray.getJSONObject(index);
 
-                                ViewOrder productItem = new ViewOrder();
+                                ViewOrderGetter productItem = new ViewOrderGetter();
 
                                 productItem.setDate(productObject.getString("date_time"));
                                 productItem.setToatlPrice(productObject.getString("total_price"));

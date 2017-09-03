@@ -1,10 +1,10 @@
-package com.example.android.jindalfresh.app_activities.search;
+package com.example.android.jindalfresh.app_activities.viewOrder;
 
 /**
  * Created by Jindal on 9/3/2017.
  */
 
-public class ViewOrder {
+public class ViewOrderGetter {
 
     private String ToatlQuantity;
     private String ToatlPrice;

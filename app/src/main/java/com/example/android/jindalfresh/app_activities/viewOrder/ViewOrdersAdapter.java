@@ -1,4 +1,4 @@
-package com.example.android.jindalfresh.app_activities.search;
+package com.example.android.jindalfresh.app_activities.viewOrder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +15,10 @@ import java.util.List;
 
 public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.ViewHolder> {
 
-    private List<ViewOrder> listItems;
+    private List<ViewOrderGetter> listItems;
     private Context context;
 
-    public ViewOrdersAdapter(List<ViewOrder> listItems, Context context) {
+    public ViewOrdersAdapter(List<ViewOrderGetter> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
         Log.v("PQRS", "HIIIIII" + listItems.size());
@@ -35,7 +35,7 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewOrdersAdapter.ViewHolder holder, final int position) {
 
-        final ViewOrder listItem = listItems.get(position);
+        final ViewOrderGetter listItem = listItems.get(position);
         Log.v("PQRS", "HIIIIII" + listItems.get(position));
 
         holder.orderView_textViewOrderDate.setText(listItem.getDate());
