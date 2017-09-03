@@ -45,6 +45,8 @@ public class ViewOrderFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //*******************************************
+        //test git commands: adding this comment by DJ
+
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading Data....");
         progressDialog.show();
