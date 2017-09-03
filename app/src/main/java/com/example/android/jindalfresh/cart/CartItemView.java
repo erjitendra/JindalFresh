@@ -12,8 +12,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.MainActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartItemView extends AppCompatActivity {
     Context context = this;
@@ -21,6 +30,7 @@ public class CartItemView extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private CartItemHandler cartItemHandler;
+    int orderSummeryTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +46,7 @@ public class CartItemView extends AppCompatActivity {
         Button paymentButton = (Button) findViewById(R.id.cartSummary_btn_payment);
         items.setText("Items: " + "" + cartItemHandler.getCartsize());
 
-        int orderSummeryTotalPrice = 0;
+
 
         for (int i = 0; i < cartItemHandler.getCartsize(); i++) {
             orderSummeryTotalPrice += cartItemHandler.getProducts(i).totalPrice();
@@ -54,9 +64,57 @@ public class CartItemView extends AppCompatActivity {
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(context, MainActivity.class);
-                Toast.makeText(context, "Order Successful", Toast.LENGTH_LONG).show();
-                startActivity(in);
+
+            String REGISTER_URL = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("total_price",Integer.toString(orderSummeryTotalPrice));
+                        params.put("total_quantity",Integer.toString(cartItemHandler.getCartsize()));
+                        return params;
+                    }
+
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                requestQueue.add(stringRequest);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                Intent in = new Intent(context, MainActivity.class);
+//                Toast.makeText(context, "Order Successful", Toast.LENGTH_LONG).show();
+//                startActivity(in);
 //                fragmentTransaction = getSupportFragmentManager().beginTransaction();
 //                fragmentTransaction.add(R.id.cartItem_parent_LL, new HomeFragment());
 //                fragmentTransaction.commit();
