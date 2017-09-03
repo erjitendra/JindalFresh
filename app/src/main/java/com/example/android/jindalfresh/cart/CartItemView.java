@@ -3,6 +3,7 @@ package com.example.android.jindalfresh.cart;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.app_activities.home.HomeFragment;
+import com.example.android.jindalfresh.app_activities.MainActivity;
 
 public class CartItemView extends AppCompatActivity {
     Context context = this;
+    FragmentTransaction fragmentTransaction;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private CartItemHandler cartItemHandler;
@@ -52,9 +54,14 @@ public class CartItemView extends AppCompatActivity {
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(context, HomeFragment.class);
+                Intent in = new Intent(context, MainActivity.class);
                 Toast.makeText(context, "Order Successful", Toast.LENGTH_LONG).show();
                 startActivity(in);
+//                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.add(R.id.cartItem_parent_LL, new HomeFragment());
+//                fragmentTransaction.commit();
+
+
             }
         });
     }

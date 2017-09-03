@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
                 Intent in = new Intent(getActivity(), CartItemView.class);
                 CartItemHandler cartItemHandler = ProductAdapter.getCartItemHandlerFromAdaptor();
                 in.putExtra("cartHandlerObject", cartItemHandler);
-                Toast.makeText(getContext(), "BEFORE" + cartItemHandler.getCartsize(), Toast.LENGTH_LONG).show();
+
                 startActivity(in);
             }
         });
