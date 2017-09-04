@@ -104,28 +104,35 @@ public class CartItemView extends AppCompatActivity {
 
         Log.v("Mumbai", "In send request");
 
+        List<Test> tests = new ArrayList<Test>();
 
-        Test test = new Test();
-        test.setName("test_name");
+        Test test1 = new Test();
+        test1.setProduct_id("3");
+        test1.setQuantity("4");
+
+        tests.add(test1);
+
+        Test test2 = new Test();
+        test2.setProduct_id("5");
+        test2.setQuantity("4");
+
+        tests.add(test2);
+
+
 
                 //get cliengt and call object for request
         TestClient client = retrofit.create(TestClient.class);
         Log.v("Mumbai", "before submit order"+client);
-        Call<Test> call = client.createTest(test);
+        Call<List<Test>> call = client.createTest(tests);
 
-        Log.v("Mumbai", "after submit order");
-        call.enqueue(new Callback<Test>() {
+        call.enqueue(new Callback<List<Test>>() {
             @Override
-            public void onResponse(Call<Test> call, retrofit2.Response<Test> response) {
-
+            public void onResponse(Call<List<Test>> call, retrofit2.Response<List<Test>> response) {
                 Toast.makeText(CartItemView.this, "Successful"+response.body(), Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
-            public void onFailure(Call<Test> call, Throwable t) {
-                Log.v("Mumbai","Failed"+t.getMessage());
-
+            public void onFailure(Call<List<Test>> call, Throwable t) {
                 Toast.makeText(CartItemView.this, "Failed"+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

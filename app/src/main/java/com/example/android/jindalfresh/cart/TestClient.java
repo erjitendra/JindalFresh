@@ -1,5 +1,7 @@
 package com.example.android.jindalfresh.cart;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
@@ -9,6 +11,6 @@ public interface TestClient {
 
     @Headers("Accept: application/json")
     @POST("v1/product/userorder/")
-    Call<Test> createTest(@Body Test test);
+    Call<List<Test>> createTest(@Body List<Test> tests);
 
 }
