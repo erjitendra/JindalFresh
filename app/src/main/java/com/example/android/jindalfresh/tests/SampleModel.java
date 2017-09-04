@@ -1,4 +1,4 @@
-package com.example.android.jindalfresh.cart;
+package com.example.android.jindalfresh.tests;
 
 import android.app.LauncherActivity;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Djindal on 04-09-2017.
  */
 
-public class Test implements Serializable {
+public class SampleModel implements Serializable {
 
 
     private String product_id;
