@@ -94,95 +94,31 @@ public class CartItemView extends AppCompatActivity {
 
     private void sendNetworkRequest(ArrayList<Product> products) {
 
-        //create retrofit instance
-
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("http://lit-dusk-68336.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
 
-        Log.v("Mumbai", "In send request");
+        CartOrderClient client = retrofit.create(CartOrderClient.class);
 
-        List<Test> tests = new ArrayList<Test>();
+        Call<ArrayList<Product>> call = client.submitOrder(products);
 
-        Test test1 = new Test();
-        test1.setProduct_id("3");
-        test1.setQuantity("4");
-
-        tests.add(test1);
-
-        Test test2 = new Test();
-        test2.setProduct_id("5");
-        test2.setQuantity("4");
-
-        tests.add(test2);
-
-
-
-                //get cliengt and call object for request
-        TestClient client = retrofit.create(TestClient.class);
-        Log.v("Mumbai", "before submit order"+client);
-        Call<List<Test>> call = client.createTest(tests);
-
-        call.enqueue(new Callback<List<Test>>() {
+        call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<List<Test>> call, retrofit2.Response<List<Test>> response) {
+            public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
+
                 Toast.makeText(CartItemView.this, "Successful"+response.body(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onFailure(Call<List<Test>> call, Throwable t) {
-                Toast.makeText(CartItemView.this, "Failed"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+                Toast.makeText(CartItemView.this, "Failed, went wrong"+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        //get cliengt and call object for request
-//        CartOrderClient client = retrofit.create(CartOrderClient.class);
-//        Log.v("Mumbai", "before submit order"+client);
-//        Log.v("Mumbai", "before submit order"+products);
-//        Log.v("Mumbai", "before submit order"+products.get(0).getEngName());
-//        Call<ArrayList<Product>> call = client.submitOrder(products);
-//
-//        Log.v("Mumbai", "after submit order");
-//        call.enqueue(new Callback<ArrayList<Product>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
-//
-//                Toast.makeText(CartItemView.this, "Successful", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-//
-//                Toast.makeText(CartItemView.this, "Failed, went wrong !!", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-
 
     }
 }

@@ -1,14 +1,18 @@
 package com.example.android.jindalfresh.cart;
 
+import android.app.LauncherActivity;
+
+import java.io.Serializable;
+
 /**
  * Created by Djindal on 04-09-2017.
  */
 
-public class Test {
+public class Test implements Serializable {
 
 
     private String product_id;
-    private String quantity;
+    private int quantity;
 
     public String getProduct_id() {
         return product_id;
@@ -18,11 +22,11 @@ public class Test {
         this.product_id = product_id;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

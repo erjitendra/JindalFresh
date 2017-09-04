@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-public class Product extends LauncherActivity.ListItem implements Serializable {
+public class Product implements Serializable {
 
     @SerializedName("name")
     private String engName;
