@@ -44,9 +44,9 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.Vi
         final ViewOrderGetter listItem = listItems.get(position);
         Log.v("PQRS", "HIIIIII" + listItems.get(position));
 
-        holder.orderView_textViewOrderDate.setText(listItem.getDate());
-        holder.orderView_textViewQuantity.setText(listItem.getToatlQuantity());
-        holder.orderView_textViewPrice.setText(listItem.getToatlPrice());
+        holder.orderView_textViewOrderDate.setText("Order Time: "+ listItem.getDate());
+        holder.orderView_textViewQuantity.setText("Quantity: "+listItem.getToatlQuantity());
+        holder.orderView_textViewPrice.setText("Paid: " + listItem.getToatlPrice()+ " Rs");
 
 
         holder.linearLayoutDetailView.setOnClickListener(new View.OnClickListener() {
