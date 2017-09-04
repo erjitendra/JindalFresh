@@ -5,6 +5,16 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
     <ImageView
         android:id="@+id/cartItem_ImageView"
         android:layout_width="0dp"
@@ -83,6 +93,7 @@
 
 
     </LinearLayout>
-
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.product.Product;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,18 +59,46 @@ public class ViewOrderFragment extends Fragment {
                     public void onResponse(String s) {
                         progressDialog.dismiss();
                         try {
-                            JSONArray productArray = new JSONArray(s);
+                            JSONArray OrderArray = new JSONArray(s);
 
-                            for (int index = 0; index <= productArray.length(); index++) {
-                                JSONObject productObject = productArray.getJSONObject(index);
+                            for (int index = 0; index <= OrderArray.length(); index++) {
+                                JSONObject orderObject = OrderArray.getJSONObject(index);
 
-                                ViewOrderGetter productItem = new ViewOrderGetter();
+                                ViewOrderGetter orderItem = new ViewOrderGetter();
 
-                                productItem.setDate(productObject.getString("date_time"));
-                                productItem.setToatlPrice(productObject.getString("total_price"));
-                                productItem.setToatlQuantity(productObject.getString("total_quantity"));
+                                orderItem.setDate(orderObject.getString("date_time"));
+                                orderItem.setToatlPrice(orderObject.getString("total_price"));
+                                orderItem.setToatlQuantity(orderObject.getString("total_quantity"));
 
-                                listItems.add(productItem);
+                                ArrayList<Product> orderedProducts = new ArrayList();
+
+
+                                try {
+                                    JSONArray productArray = orderObject.getJSONArray("products");
+
+                                    for (int productIndex = 0; productIndex <= productArray.length(); productIndex++) {
+                                        JSONObject productObject = productArray.getJSONObject(productIndex);
+
+                                        Product productItem = new Product();
+
+                                        productItem.setEngName(productObject.getString("name"));
+                                        productItem.setHindiName(productObject.getString("hindi_name"));
+                                        productItem.setImageUrl(productObject.getString("image_path"));
+                                        productItem.setRate(productObject.getInt("rate"));
+                                        productItem.setUnit(productObject.getString("unit"));
+                                        productItem.setTotalQuantity(productObject.getInt("quantity"));
+
+                                        orderedProducts.add(productItem);
+                                    }
+
+                                    orderItem.setOrderedProducts(orderedProducts);
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                listItems.add(orderItem);
                             }
 
 
@@ -89,6 +119,14 @@ public class ViewOrderFragment extends Fragment {
         );
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
+        LinearLayout linearLayout_detailView = (LinearLayout) rootView.findViewById(R.id.order_View_LinearLayout);
+        linearLayout_detailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         return rootView;
     }

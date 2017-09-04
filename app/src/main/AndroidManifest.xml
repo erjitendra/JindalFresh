@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".cart.CartItemView"></activity>
+        <activity android:name=".cart.CartItemView" />
+        <activity android:name=".app_activities.viewOrder.OrderDetailView"></activity>
     </application>
 
 </manifest>

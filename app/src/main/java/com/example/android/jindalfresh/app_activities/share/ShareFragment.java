@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import com.example.android.jindalfresh.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ShareFragment extends Fragment {
 
 
@@ -25,7 +22,11 @@ public class ShareFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_share, container, false);
+
+
+        return rootView;
+
     }
 
 }
