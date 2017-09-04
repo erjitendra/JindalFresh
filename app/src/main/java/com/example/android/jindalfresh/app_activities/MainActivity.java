@@ -14,8 +14,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.auth.LoginFragment;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
-import com.example.android.jindalfresh.app_activities.settings.SettingFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
 import com.example.android.jindalfresh.app_activities.viewOrder.ViewOrderFragment;
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.setting:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new SettingFragment());
+                        fragmentTransaction.replace(R.id.frame_layout, new LoginFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Setting");
                         item.setChecked(true);

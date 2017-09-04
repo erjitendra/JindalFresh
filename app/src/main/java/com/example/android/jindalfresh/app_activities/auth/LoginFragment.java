@@ -1,4 +1,4 @@
-package com.example.android.jindalfresh.app_activities.settings;
+package com.example.android.jindalfresh.app_activities.auth;
 
 
 import android.os.Bundle;
@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.cart.CartItemHandler;
 
-public class SettingFragment extends Fragment {
+public class LoginFragment extends Fragment {
     private CartItemHandler cart;
 
-    public SettingFragment() {
+    public LoginFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
+        View rootView = inflater.inflate(R.layout.login, container, false);
 
         //cart = (CartItemHandler) getContext().getSerializableExtra("cartObject");
 
