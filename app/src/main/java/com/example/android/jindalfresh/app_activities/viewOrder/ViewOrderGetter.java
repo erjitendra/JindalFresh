@@ -2,13 +2,10 @@ package com.example.android.jindalfresh.app_activities.viewOrder;
 
 import com.example.android.jindalfresh.product.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by Jindal on 9/3/2017.
- */
-
-public class ViewOrderGetter {
+public class ViewOrderGetter implements Serializable {
 
     ArrayList<Product> orderedProducts;
     private String ToatlQuantity;

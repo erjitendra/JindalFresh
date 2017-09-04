@@ -12,6 +12,17 @@ public class Product extends LauncherActivity.ListItem implements Serializable {
     private int totalQuantity;
     private String imageUrl;
     private String unit;
+    private String productId;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+
 
     public String getUnit() {
         return unit;

@@ -7,11 +7,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,7 +22,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.MainActivity;
+import com.example.android.jindalfresh.product.Product;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,11 +88,48 @@ public class CartItemView extends AppCompatActivity {
                                 Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
                             }
                         }){
+
+
+
+//                    @Override
+//                    protected Map<String,String> getParams(){
+//                        Map<String,String> params = new HashMap<String, String>();
+//                        params.put("total_price",Integer.toString(orderSummeryTotalPrice));
+//                        params.put("total_quantity",Integer.toString(cartItemHandler.getCartsize()));
+//                        return params;
+//                    }
+
+
                     @Override
                     protected Map<String,String> getParams(){
+
                         Map<String,String> params = new HashMap<String, String>();
-                        params.put("total_price",Integer.toString(orderSummeryTotalPrice));
-                        params.put("total_quantity",Integer.toString(cartItemHandler.getCartsize()));
+
+                        JSONArray products = new JSONArray();
+
+                        for (int i = 0; i < cartItemHandler.getCartsize(); i++) {
+                            JSONObject orderedProduct= new JSONObject();
+
+                            Product product = cartItemHandler.getProducts(i);
+                            try {
+                                orderedProduct.put("product_id",product.getProductId());
+                                orderedProduct.put("quantity",Integer.toString(product.getTotalQuantity()));
+
+                                Log.v("mumbai", "test id"+product.getProductId());
+                                Log.v("mumbai", "test qt"+product.getTotalQuantity());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            products.put(orderedProduct);
+                        }
+                        params.put("data", products.toString());
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/x-www-form-urlencoded;  charset=utf-8");
                         return params;
                     }
 

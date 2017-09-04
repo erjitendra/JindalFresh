@@ -1,14 +1,20 @@
 package com.example.android.jindalfresh.app_activities.viewOrder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.home.ProductAdapter;
+import com.example.android.jindalfresh.cart.CartItemHandler;
+import com.example.android.jindalfresh.cart.CartItemView;
 
 import java.util.List;
 
@@ -41,6 +47,19 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.Vi
         holder.orderView_textViewOrderDate.setText(listItem.getDate());
         holder.orderView_textViewQuantity.setText(listItem.getToatlQuantity());
         holder.orderView_textViewPrice.setText(listItem.getToatlPrice());
+
+
+        holder.linearLayoutDetailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context,"Position is"+position,Toast.LENGTH_LONG).show();
+
+                Intent in = new Intent(context, OrderDetailView.class);
+                Log.v("Mumbai", "in view order adaptor");
+                in.putExtra("orderItem", listItem);
+                context.startActivity(in);
+            }
+        });
     }
 
 
@@ -54,6 +73,7 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.Vi
         public TextView orderView_textViewOrderDate;
         public TextView orderView_textViewQuantity;
         public TextView orderView_textViewPrice;
+        public LinearLayout linearLayoutDetailView;
 
 
         public ViewHolder(View itemView) {
@@ -62,6 +82,7 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.Vi
             orderView_textViewOrderDate = (TextView) itemView.findViewById(R.id.textView_Order_Date);
             orderView_textViewQuantity = (TextView) itemView.findViewById(R.id.textView_Total_Quantity_Order_View);
             orderView_textViewPrice = (TextView) itemView.findViewById(R.id.textView_Total_Price_Order_View);
+            linearLayoutDetailView=(LinearLayout)itemView.findViewById(R.id.order_View_LinearLayout);
 
 
         }

@@ -119,14 +119,6 @@ public class ViewOrderFragment extends Fragment {
         );
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
-        LinearLayout linearLayout_detailView = (LinearLayout) rootView.findViewById(R.id.order_View_LinearLayout);
-        linearLayout_detailView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
         return rootView;
     }

@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
                                 Product productItem = new Product();
 
                                 productItem.setEngName(productObject.getString("name"));
+                                productItem.setProductId(productObject.getString("product_id"));
                                 productItem.setHindiName(productObject.getString("hindi_name"));
                                 productItem.setImageUrl(productObject.getString("image_path"));
                                 productItem.setRate(productObject.getInt("rate"));
