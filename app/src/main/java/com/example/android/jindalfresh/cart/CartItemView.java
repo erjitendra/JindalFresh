@@ -30,7 +30,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CartItemView extends AppCompatActivity {
     Context context = this;
@@ -55,7 +61,6 @@ public class CartItemView extends AppCompatActivity {
         items.setText("Items: " + "" + cartItemHandler.getCartsize());
 
 
-
         for (int i = 0; i < cartItemHandler.getCartsize(); i++) {
             orderSummeryTotalPrice += cartItemHandler.getProducts(i).totalPrice();
         }
@@ -69,103 +74,60 @@ public class CartItemView extends AppCompatActivity {
 
         adapter = new CartItemAdapter(cartItemHandler.getCartItems(), context);
         recyclerView.setAdapter(adapter);
+
+
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            String REGISTER_URL = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
+                String REGISTER_URL = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(context,response,Toast.LENGTH_LONG).show();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
-                            }
-                        }){
+                ArrayList<Product> products = cartItemHandler.getCartItems();
+                sendNetworkRequest(products);
 
 
-
-//                    @Override
-//                    protected Map<String,String> getParams(){
-//                        Map<String,String> params = new HashMap<String, String>();
-//                        params.put("total_price",Integer.toString(orderSummeryTotalPrice));
-//                        params.put("total_quantity",Integer.toString(cartItemHandler.getCartsize()));
-//                        return params;
-//                    }
-
-
-                    @Override
-                    protected Map<String,String> getParams(){
-
-                        Map<String,String> params = new HashMap<String, String>();
-
-                        JSONArray products = new JSONArray();
-
-                        for (int i = 0; i < cartItemHandler.getCartsize(); i++) {
-                            JSONObject orderedProduct= new JSONObject();
-
-                            Product product = cartItemHandler.getProducts(i);
-                            try {
-                                orderedProduct.put("product_id",product.getProductId());
-                                orderedProduct.put("quantity",Integer.toString(product.getTotalQuantity()));
-
-                                Log.v("mumbai", "test id"+product.getProductId());
-                                Log.v("mumbai", "test qt"+product.getTotalQuantity());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            products.put(orderedProduct);
-                        }
-                        params.put("data", products.toString());
-                        return params;
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Content-Type", "application/x-www-form-urlencoded;  charset=utf-8");
-                        return params;
-                    }
-
-                };
-
-                RequestQueue requestQueue = Volley.newRequestQueue(context);
-                requestQueue.add(stringRequest);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                Intent in = new Intent(context, MainActivity.class);
-//                Toast.makeText(context, "Order Successful", Toast.LENGTH_LONG).show();
-//                startActivity(in);
-//                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.add(R.id.cartItem_parent_LL, new HomeFragment());
-//                fragmentTransaction.commit();
 
 
             }
         });
+    }
+
+    private void sendNetworkRequest(ArrayList<Product> products) {
+
+        //create retrofit instance
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://lit-dusk-68336.herokuapp.com/api/v1/product/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+
+        Log.v("Mumbai", "In send request");
+
+        //get cliengt and call object for request
+        CartOrderClient client = retrofit.create(CartOrderClient.class);
+        Log.v("Mumbai", "before submit order"+client);
+        Log.v("Mumbai", "before submit order"+products);
+        Log.v("Mumbai", "before submit order"+products.get(0).getEngName());
+        Call<ArrayList<Product>> call = client.submitOrder(products);
+
+        Log.v("Mumbai", "after submit order");
+        call.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
+
+                Toast.makeText(CartItemView.this, "Successful", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+                Toast.makeText(CartItemView.this, "Failed, went wrong !!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 }

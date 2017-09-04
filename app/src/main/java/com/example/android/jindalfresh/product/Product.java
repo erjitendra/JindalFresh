@@ -2,16 +2,32 @@ package com.example.android.jindalfresh.product;
 
 import android.app.LauncherActivity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 
 public class Product extends LauncherActivity.ListItem implements Serializable {
+
+    @SerializedName("name")
     private String engName;
+
+    @SerializedName("hindi_name")
     private String hindiName;
+
+    @SerializedName("rate")
     private int rate;
+
+    @SerializedName("quantity")
     private int totalQuantity;
+
+    @SerializedName("image_path")
     private String imageUrl;
+
+    @SerializedName("unit")
     private String unit;
+
+    @SerializedName("product_id")
     private String productId;
 
     public String getProductId() {
