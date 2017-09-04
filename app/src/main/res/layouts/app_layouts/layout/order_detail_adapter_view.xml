@@ -85,8 +85,7 @@
                         android:id="@+id/OrderedItemDetail_TotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/Price"
-
+                        android:layout_toRightOf="@+id/OrderedItemDetailPrice"
                         android:textStyle="bold" />
 
                 </RelativeLayout>

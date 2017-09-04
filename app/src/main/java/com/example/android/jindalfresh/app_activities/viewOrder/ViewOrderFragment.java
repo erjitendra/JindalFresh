@@ -70,15 +70,13 @@ public class ViewOrderFragment extends Fragment {
                                 orderItem.setToatlPrice(orderObject.getString("total_price"));
                                 orderItem.setToatlQuantity(orderObject.getString("total_quantity"));
 
-                                ArrayList<Product> orderedProducts = new ArrayList();
-
-
-                                try {
+                                     ArrayList<Product> orderedProducts = new ArrayList<>();
                                     JSONArray productArray = orderObject.getJSONArray("products");
 
-                                    for (int productIndex = 0; productIndex <= productArray.length(); productIndex++) {
-                                        JSONObject productObject = productArray.getJSONObject(productIndex);
+                                    for (int productIndex = 0; productIndex < productArray.length(); productIndex++) {
 
+                                        JSONObject productObject = productArray.getJSONObject(productIndex);
+//
                                         Product productItem = new Product();
 
                                         productItem.setEngName(productObject.getString("name"));
@@ -87,16 +85,11 @@ public class ViewOrderFragment extends Fragment {
                                         productItem.setRate(productObject.getInt("rate"));
                                         productItem.setUnit(productObject.getString("unit"));
                                         productItem.setTotalQuantity(productObject.getInt("quantity"));
-
+//
                                         orderedProducts.add(productItem);
                                     }
 
                                     orderItem.setOrderedProducts(orderedProducts);
-
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
 
                                 listItems.add(orderItem);
                             }
@@ -107,7 +100,6 @@ public class ViewOrderFragment extends Fragment {
                         }
                         adapter = new ViewOrdersAdapter(listItems, getContext());
                         recyclerView.setAdapter(adapter);
-                        Log.v("XYZ", "Hi" + recyclerView);
                     }
                 }, new Response.ErrorListener() {
             @Override

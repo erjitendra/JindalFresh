@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ViewOrderGetter implements Serializable {
 
-    ArrayList<Product> orderedProducts;
+    ArrayList<Product> orderedProducts=new ArrayList<>();
     private String ToatlQuantity;
     private String ToatlPrice;
     private String Date;
