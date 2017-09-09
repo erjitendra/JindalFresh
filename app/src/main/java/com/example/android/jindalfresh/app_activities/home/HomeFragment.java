@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -40,6 +42,8 @@ public class HomeFragment extends Fragment {
 
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
     public Button buttonSubmit;
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter1;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Product> listItems;
@@ -58,6 +62,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listItems = new ArrayList<>();
+        spinner = (Spinner) rootView.findViewById(R.id.spinner);
 
         //*******************************************
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -94,6 +99,25 @@ public class HomeFragment extends Fragment {
                         }
                         adapter = new ProductAdapter(listItems, getContext());
                         recyclerView.setAdapter(adapter);
+
+//....Spinner
+
+//                        adapter1=ArrayAdapter.createFromResource(getContext(),R.array.country_names,android.R.layout.simple_spinner_item);
+//                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                        spinner.setAdapter(adapter1);
+//                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                            @Override
+//                            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+//                                Toast.makeText(getContext(),parent.getItemAtPosition(i)+"Selected",Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                            }
+//                        });
+
+                        //spinner end
                         Log.v("XYZ", "Hi" + recyclerView);
                     }
                 }, new Response.ErrorListener() {

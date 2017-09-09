@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     public static CartItemHandler cartItemHanlder = new CartItemHandler();
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter1;
     private List<Product> listItems;
     private Context context;
 
@@ -46,12 +51,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final Product listItem = listItems.get(position);
+        adapter1 = ArrayAdapter.createFromResource(context, R.array.country_names, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());
         holder.textViewQuantity.setText(Integer.toString(listItem.getTotalQuantity()));
         holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
         Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
+        holder.spinner.setAdapter(adapter1);
+        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, parent.getItemAtPosition(position) + "Selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
@@ -116,6 +135,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public TextView textViewPrice;
         public TextView textViewTotalQuantity;
         public Button buttonSubmit;
+        public Spinner spinner;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -129,6 +149,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
             buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
             buttonSubmit = (Button) itemView.findViewById(R.id.btn_submit);
+            spinner = (Spinner) itemView.findViewById(R.id.spinner);
 
 
 
