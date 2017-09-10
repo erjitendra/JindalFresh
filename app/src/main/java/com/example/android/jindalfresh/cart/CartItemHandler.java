@@ -1,11 +1,21 @@
 package com.example.android.jindalfresh.cart;
 
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CartItemHandler implements Serializable {
+    TextView cartSummaryTextView;
+    public void setText_view(TextView cartSummaryTextView) {
+        this.cartSummaryTextView = cartSummaryTextView;
+        updateCartSummaryText();
+    }
+    
     private ArrayList<Product> cartItems = new ArrayList<Product>();
 
     public Product getProducts(int position) {
@@ -13,7 +23,10 @@ public class CartItemHandler implements Serializable {
     }
 
     public void setProducts(Product Products) {
+
         cartItems.add(Products);
+        updateCartSummaryText();
+
     }
 
     public int getCartsize() {
@@ -27,5 +40,11 @@ public class CartItemHandler implements Serializable {
 
     public ArrayList<Product> getCartItems() {
         return cartItems;
+    }
+
+
+    public void updateCartSummaryText(){
+        cartSummaryTextView.setText(Integer.toString(getCartsize()));
+
     }
 }

@@ -16,14 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.cart.CartItemHandler;
+import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    public static CartItemHandler cartItemHanlder = new CartItemHandler();
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter1;
     private List<Product> listItems;
@@ -34,12 +33,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.context = context;
 
     }
-
-    public static CartItemHandler getCartItemHandlerFromAdaptor() {
-
-        return cartItemHanlder;
-    }
-
 
 
     @Override
@@ -80,12 +73,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             public void onClick(View v) {
 
 
-                if (!cartItemHanlder.CheckProductInCart(listItem)) {
+                if (!AppData.getCartItemHandler().CheckProductInCart(listItem)) {
                     holder.buttonAddToCart.setText("Added");
-                    cartItemHanlder.setProducts(listItem);
-                    holder.cartItems_No_display.setText(Integer.toString(cartItemHanlder.getCartsize()));
-
-                    Toast.makeText(context, "New CartSize:" + cartItemHanlder.getCartsize(), Toast.LENGTH_LONG).show();
+                    AppData.getCartItemHandler().setProducts(listItem);
                 } else {
                     Toast.makeText(context, "Already Added", Toast.LENGTH_LONG).show();
                 }
@@ -119,7 +109,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewEngName, cartItems_No_display;
+        public TextView textViewEngName;
         public TextView textViewHindiName;
         public ImageView imageView;
         public TextView textViewQuantity;
@@ -142,9 +132,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             buttonIncrement = (Button) itemView.findViewById(R.id.btn_Increment);
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
             buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
-            buttonSubmit = (RelativeLayout) itemView.findViewById(R.id.btn_submit);
             spinner = (Spinner) itemView.findViewById(R.id.spinner);
-            cartItems_No_display = (TextView) itemView.findViewById(R.id.cart_items_no_display);
 
 
 

@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.cart.CartItemHandler;
 import com.example.android.jindalfresh.cart.CartItemView;
+import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 
 import org.json.JSONArray;
@@ -61,10 +64,27 @@ public class HomeFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        RelativeLayout cartCheckout = (RelativeLayout) rootView.findViewById(R.id.cart_checkout);
+        TextView cartItems_No_display = (TextView) rootView.findViewById(R.id.cart_items_no_display);
+        AppData.getCartItemHandler().setText_view(cartItems_No_display);
+
+        cartCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent in = new Intent(getActivity(), CartItemView.class);
+                startActivity(in);
+            }
+        });
+
+
+
         listItems = new ArrayList<>();
         spinner = (Spinner) rootView.findViewById(R.id.spinner);
 
-        //*******************************************
+
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading Data....");
         progressDialog.show();
@@ -112,20 +132,6 @@ public class HomeFragment extends Fragment {
         );
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
-
-
-        Button btn = (Button) rootView.findViewById(R.id.btn_submit);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent in = new Intent(getActivity(), CartItemView.class);
-                CartItemHandler cartItemHandler = ProductAdapter.getCartItemHandlerFromAdaptor();
-                in.putExtra("cartHandlerObject", cartItemHandler);
-
-                startActivity(in);
-            }
-        });
         return rootView;
     }
 

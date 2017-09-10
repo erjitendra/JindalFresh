@@ -18,6 +18,7 @@ import com.example.android.jindalfresh.app_activities.auth.LoginFragment;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
 import com.example.android.jindalfresh.app_activities.viewOrder.ViewOrderFragment;
+import com.example.android.jindalfresh.generic.AppData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setToolBar();
         fragmentStart();
         setUpNavigation();
+
+        AppData.initiateAppData();
 
     }
 
