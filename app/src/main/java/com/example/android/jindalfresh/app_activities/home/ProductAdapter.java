@@ -20,11 +20,12 @@ import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Spinner spinner;
-    ArrayAdapter<CharSequence> adapter1;
+    ArrayAdapter<Integer> adapter1;
     private List<Product> listItems;
     private Context context;
 
@@ -45,14 +46,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final Product listItem = listItems.get(position);
-        adapter1 = ArrayAdapter.createFromResource(context, R.array.country_names, android.R.layout.simple_spinner_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());
         holder.textViewQuantity.setText(Integer.toString(listItem.getTotalQuantity()));
         holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
         Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
+
+        ArrayList<Integer> quantityInterval = listItem.getQunatityInterval();
+        adapter1 = new ArrayAdapter<Integer>(context, android.R.layout.simple_spinner_item, quantityInterval);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         holder.spinner.setAdapter(adapter1);
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

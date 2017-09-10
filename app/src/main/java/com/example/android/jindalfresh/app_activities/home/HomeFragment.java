@@ -110,6 +110,15 @@ public class HomeFragment extends Fragment {
                                 productItem.setUnit(productObject.getString("unit"));
                                 productItem.setDefaultQuantity();
 
+                                ArrayList<Integer> quantityInterval = new ArrayList<Integer>();
+                                quantityInterval.add(1);
+                                quantityInterval.add(2);
+                                quantityInterval.add(5);
+                                quantityInterval.add(10);
+                                quantityInterval.add(50);
+
+                                productItem.setQunatityInterval(quantityInterval);
+
                                 listItems.add(productItem);
                             }
 

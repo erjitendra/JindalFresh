@@ -5,12 +5,15 @@ import android.app.LauncherActivity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Product implements Serializable {
 
     @SerializedName("name")
     private String engName;
+
+    private ArrayList<Integer> qunatityInterval;
 
     @SerializedName("hindi_name")
     private String hindiName;
@@ -29,6 +32,14 @@ public class Product implements Serializable {
 
     @SerializedName("product_id")
     private String productId;
+
+    public ArrayList<Integer> getQunatityInterval() {
+        return qunatityInterval;
+    }
+
+    public void setQunatityInterval(ArrayList<Integer> qunatityInterval) {
+        this.qunatityInterval = qunatityInterval;
+    }
 
     public String getProductId() {
         return productId;
