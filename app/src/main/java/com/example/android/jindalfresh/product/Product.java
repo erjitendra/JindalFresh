@@ -1,7 +1,5 @@
 package com.example.android.jindalfresh.product;
 
-import android.app.LauncherActivity;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,6 +18,7 @@ public class Product implements Serializable {
 
     @SerializedName("rate")
     private int rate;
+    private int quantityIntervalValue;
 
     @SerializedName("quantity")
     private int totalQuantity;
@@ -89,6 +88,10 @@ public class Product implements Serializable {
 
     public void doDecrement() {
         totalQuantity -= 1;
+    }
+
+    public void multiplyWithQuantityInterval(int selectedQuantityInterval) {
+        totalQuantity = selectedQuantityInterval * totalQuantity;
     }
 
     public String getImageUrl() {

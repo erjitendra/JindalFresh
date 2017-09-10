@@ -60,8 +60,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.spinner.setAdapter(adapter1);
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, parent.getItemAtPosition(position) + "Selected", Toast.LENGTH_LONG).show();
+            public void onItemSelected(AdapterView<?> parent, View view, int SelectedSpinnerPosition, long id) {
+                //Toast.makeText(context, parent.getItemAtPosition(position) + "Selected", Toast.LENGTH_LONG).show();
+                listItem.multiplyWithQuantityInterval(SelectedSpinnerPosition);
+                notifyItemChanged(position);
             }
 
             @Override
