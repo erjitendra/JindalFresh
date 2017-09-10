@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 if (!cartItemHanlder.CheckProductInCart(listItem)) {
                     holder.buttonAddToCart.setText("Added");
                     cartItemHanlder.setProducts(listItem);
+                    holder.cartItems_No_display.setText(Integer.toString(cartItemHanlder.getCartsize()));
 
                     Toast.makeText(context, "New CartSize:" + cartItemHanlder.getCartsize(), Toast.LENGTH_LONG).show();
                 } else {
@@ -106,14 +108,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 notifyItemChanged(position);
             }
         });
-//        holder.buttonSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//               Intent in = new Intent(context, CartItems.class);
-//                context.startActivity(in);
-//                notifyItemChanged(position);
-//            }
-//        });
 
 
     }
@@ -125,7 +119,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewEngName;
+        public TextView textViewEngName, cartItems_No_display;
         public TextView textViewHindiName;
         public ImageView imageView;
         public TextView textViewQuantity;
@@ -134,7 +128,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public Button buttonAddToCart;
         public TextView textViewPrice;
         public TextView textViewTotalQuantity;
-        public Button buttonSubmit;
+        public RelativeLayout buttonSubmit;
         public Spinner spinner;
 
         public ViewHolder(View itemView) {
@@ -148,8 +142,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             buttonIncrement = (Button) itemView.findViewById(R.id.btn_Increment);
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
             buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
-            buttonSubmit = (Button) itemView.findViewById(R.id.btn_submit);
+            buttonSubmit = (RelativeLayout) itemView.findViewById(R.id.btn_submit);
             spinner = (Spinner) itemView.findViewById(R.id.spinner);
+            cartItems_No_display = (TextView) itemView.findViewById(R.id.cart_items_no_display);
 
 
 

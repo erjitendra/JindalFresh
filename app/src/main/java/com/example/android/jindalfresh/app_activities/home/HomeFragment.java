@@ -100,24 +100,6 @@ public class HomeFragment extends Fragment {
                         adapter = new ProductAdapter(listItems, getContext());
                         recyclerView.setAdapter(adapter);
 
-//....Spinner
-
-//                        adapter1=ArrayAdapter.createFromResource(getContext(),R.array.country_names,android.R.layout.simple_spinner_item);
-//                        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        spinner.setAdapter(adapter1);
-//                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            @Override
-//                            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-//                                Toast.makeText(getContext(),parent.getItemAtPosition(i)+"Selected",Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            @Override
-//                            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                            }
-//                        });
-
-                        //spinner end
                         Log.v("XYZ", "Hi" + recyclerView);
                     }
                 }, new Response.ErrorListener() {

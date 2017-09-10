@@ -7,19 +7,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="country_names">
         <item>
-            India
+            1 Kg
         </item>
         <item>
-            Amerika
+            2 Kg
         </item>
         <item>
-            Rusia
+            5 Kg
         </item>
         <item>
-            Brazil
+            10 Kg
         </item>
         <item>
-            Japan
+            50 Kg
         </item>
     </string-array>
 
