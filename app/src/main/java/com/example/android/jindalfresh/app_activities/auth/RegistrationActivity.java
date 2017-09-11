@@ -11,7 +11,6 @@ import com.example.android.jindalfresh.product.Product;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -45,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         CustomAuthClient client = retrofit.create(CustomAuthClient.class);
 
-        Call<ArrayList<Product>> call = client.register(products);
+        //Call<ArrayList<Product>> call = client.register(products);
 
     }
 }
