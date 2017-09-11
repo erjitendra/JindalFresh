@@ -82,7 +82,8 @@ public class CartItemView extends AppCompatActivity {
 
         CartOrderClient client = retrofit.create(CartOrderClient.class);
 
-        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
+//        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
+        String accessToken = "Bearer Zfpn0n2JeR0p3wvyzhY0ddVJtY3ZwK";
 
         Call<ArrayList<Product>> call = client.submitOrder(products, accessToken);
 
