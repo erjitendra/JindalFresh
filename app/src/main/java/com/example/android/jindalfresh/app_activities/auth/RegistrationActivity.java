@@ -1,5 +1,7 @@
 package com.example.android.jindalfresh.app_activities.auth;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,17 +23,28 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextLastName;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         Button SignupButton = (Button) findViewById(R.id.button_signup_signup);
+        Button LoginButton = (Button) findViewById(R.id.button_signup_login);
+
         editTextFirstName = (EditText) findViewById(R.id.editText_signup_first_name);
         editTextLastName = (EditText) findViewById(R.id.editText_signup_last_name);
         editTextEmail = (EditText) findViewById(R.id.editText_signup_email);
         editTextPassword = (EditText) findViewById(R.id.editText_signup_password);
 
-
+        LoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         SignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
