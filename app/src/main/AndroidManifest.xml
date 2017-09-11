@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".cart.CartItemView" />
         <activity android:name=".app_activities.viewOrder.OrderDetailView" />
-        <activity android:name=".app_activities.auth.RegistrationActivity"></activity>
+        <activity android:name=".app_activities.auth.RegistrationActivity" />
+        <activity android:name=".app_activities.auth.LoginActivity"></activity>
     </application>
 
 </manifest>
