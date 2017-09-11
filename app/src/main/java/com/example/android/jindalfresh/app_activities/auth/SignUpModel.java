@@ -1,10 +1,16 @@
 package com.example.android.jindalfresh.app_activities.auth;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SignUpModel {
 
     private String password;
     private String email;
+
+    @SerializedName("first_name")
     private String firstName;
+
+    @SerializedName("last_name")
     private String lastName;
 
     public String getFirstName() {

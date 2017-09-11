@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".app_activities.MainActivity">
+
+        </activity>
+        <activity android:name=".cart.CartItemView" />
+        <activity android:name=".app_activities.viewOrder.OrderDetailView" />
+        <activity android:name=".app_activities.auth.RegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
