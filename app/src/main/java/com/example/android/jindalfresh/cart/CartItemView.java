@@ -82,7 +82,9 @@ public class CartItemView extends AppCompatActivity {
 
         CartOrderClient client = retrofit.create(CartOrderClient.class);
 
-        Call<ArrayList<Product>> call = client.submitOrder(products);
+        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
+
+        Call<ArrayList<Product>> call = client.submitOrder(products, accessToken);
 
         call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
