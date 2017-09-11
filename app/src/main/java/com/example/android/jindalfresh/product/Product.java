@@ -18,7 +18,8 @@ public class Product implements Serializable {
 
     @SerializedName("rate")
     private int rate;
-    private int quantityIntervalValue;
+    private int quantityIntervalValue = 1;
+
 
     @SerializedName("quantity")
     private int totalQuantity;
@@ -48,6 +49,14 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
+
+    public int getQuantityIntervalValue() {
+        return quantityIntervalValue;
+    }
+
+    public void setQuantityIntervalValue(int quantityIntervalValue) {
+        this.quantityIntervalValue = quantityIntervalValue;
+    }
 
 
     public String getUnit() {
@@ -87,7 +96,9 @@ public class Product implements Serializable {
     }
 
     public void doDecrement() {
+        if (totalQuantity > 0) {
         totalQuantity -= 1;
+        }
     }
 
     public void multiplyWithQuantityInterval(int selectedQuantityInterval) {

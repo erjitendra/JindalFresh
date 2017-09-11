@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +27,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     ArrayAdapter<Integer> adapter1;
     private List<Product> listItems;
     private Context context;
+    private Product listItem;
 
     public ProductAdapter(List<Product> listItems, Context context) {
         this.listItems = listItems;
@@ -45,32 +45,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final Product listItem = listItems.get(position);
+        listItem = listItems.get(position);
+
 
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());
         holder.textViewQuantity.setText(Integer.toString(listItem.getTotalQuantity()));
         holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
+        //holder.textViewSpinnerValue.setText(Integer.toString(listItem.getQuantityIntervalValue()));
+
         Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
 
+
+        //*********************Spinner*********************************
         ArrayList<Integer> quantityInterval = listItem.getQunatityInterval();
         adapter1 = new ArrayAdapter<Integer>(context, android.R.layout.simple_spinner_item, quantityInterval);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         holder.spinner.setAdapter(adapter1);
-        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int SelectedSpinnerPosition, long id) {
-                //Toast.makeText(context, parent.getItemAtPosition(position) + "Selected", Toast.LENGTH_LONG).show();
-                listItem.multiplyWithQuantityInterval(SelectedSpinnerPosition);
-                notifyItemChanged(position);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        //*********************Spinner*********************************
 
         String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
@@ -91,9 +84,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.buttonIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
+
                 listItem.doIncrement();
                 notifyItemChanged(position);
+
             }
         });
         holder.buttonDecrement.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +109,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewEngName;
+        public TextView textViewEngName, textViewSpinnerValue;
         public TextView textViewHindiName;
         public ImageView imageView;
         public TextView textViewQuantity;
@@ -139,6 +133,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
             buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
             spinner = (Spinner) itemView.findViewById(R.id.spinner);
+            //textViewSpinnerValue=(TextView)itemView.findViewById(R.id.spinnerValue);
 
 
 

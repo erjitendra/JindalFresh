@@ -25,7 +25,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.cart.CartItemHandler;
 import com.example.android.jindalfresh.cart.CartItemView;
 import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
@@ -50,6 +49,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Product> listItems;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -82,7 +82,6 @@ public class HomeFragment extends Fragment {
 
 
         listItems = new ArrayList<>();
-        spinner = (Spinner) rootView.findViewById(R.id.spinner);
 
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -128,6 +127,7 @@ public class HomeFragment extends Fragment {
                         }
                         adapter = new ProductAdapter(listItems, getContext());
                         recyclerView.setAdapter(adapter);
+
 
                         Log.v("XYZ", "Hi" + recyclerView);
                     }
