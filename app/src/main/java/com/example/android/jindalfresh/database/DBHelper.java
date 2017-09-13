@@ -18,7 +18,6 @@ public class DBHelper {
 
     public String getLatestToken() {
         String token = null;
-        String token1 = null;
         try {
             SQLiteDatabase db = dbCreator.getReadableDatabase();
             String selectQuerySQLCommand = "SELECT * FROM " + UserDataTable.TABLE_NAME + " ORDER BY _id DESC LIMIT 1";
