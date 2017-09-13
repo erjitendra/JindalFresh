@@ -1,5 +1,8 @@
 package com.example.android.jindalfresh.app_activities.auth;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.jindalfresh.Database.JFContract;
+import com.example.android.jindalfresh.Database.JFDbhelper;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.generic.AppData;
 
@@ -18,9 +23,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
+    private JFDbhelper mDbHelper;
 
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private UserTokenModel userTokenModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail = (EditText) findViewById(R.id.editText_login_email);
         editTextPassword = (EditText) findViewById(R.id.editText_login_password);
+        mDbHelper = new JFDbhelper(this);
+        displayDatabaseInfo();
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,10 +50,58 @@ public class LoginActivity extends AppCompatActivity {
                 LoginDataHolder.setPassword(editTextPassword.getText().toString());
 
                 sendNetworkRequest(LoginDataHolder);
+
+                //Toast.makeText(LoginActivity.this, "Successful" + userTokenModel.getAccessToken(), Toast.LENGTH_SHORT).show();
             }
         });
 
 
+    }
+
+    private void displayDatabaseInfo() {
+        // To access our database, we instantiate our subclass of SQLiteOpenHelper
+        // and pass the context, which is the current activity.
+
+
+        // Create and/or open a database to read from it
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Perform this raw SQL query "SELECT * FROM pets"
+        // to get a Cursor that contains all rows from the pets table.
+        Cursor cursor = db.rawQuery("SELECT * FROM " + JFContract.JFEntry.TABLE_NAME, null);
+        try {
+            //Toast.makeText(LoginActivity.this, "Number of rows in  database table: " + cursor.getCount() , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this, "Bearer " + AppData.getUserModelToken().getAccessToken() , Toast.LENGTH_SHORT).show();
+
+            // Display the number of rows in the Cursor (which reflects the number of rows in the
+            // pets table in the database).
+//            TextView displayView = (TextView) findViewById(R.id.text_view_pet);
+//            displayView.setText("Number of rows in pets database table: " + cursor.getCount());
+        } finally {
+            // Always close the cursor when you're done reading from it. This releases all its
+            // resources and makes it invalid.
+            cursor.close();
+        }
+    }
+
+    private void insertTokenInDb() {
+        // Gets the database in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        // Create a ContentValues object where column names are the keys,
+        // and Toto's pet attributes are the values.
+        ContentValues values = new ContentValues();
+        values.put(JFContract.JFEntry.COLUMN_TOKEN_NO, userTokenModel.getAccessToken());
+
+
+        // Insert a new row for Toto in the database, returning the ID of that new row.
+        // The first argument for db.insert() is the pets table name.
+        // The second argument provides the name of a column in which the framework
+        // can insert NULL in the event that the ContentValues is empty (if
+        // this is set to "null", then the framework will not insert a row when
+        // there are no values).
+        // The third argument is the ContentValues object containing the info for Toto.
+        long newRowId = db.insert(JFContract.JFEntry.TABLE_NAME, null, values);
     }
 
     private void sendNetworkRequest(LoginModel LoginDataHolder) {
@@ -75,10 +132,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserTokenModel> call, Response<UserTokenModel> response) {
 
-                UserTokenModel userTokenModel = response.body();
+                userTokenModel = response.body();
 
                 AppData.setUserModelToken(userTokenModel);
 
+                insertTokenInDb();
                 Toast.makeText(LoginActivity.this, "Successful" + userTokenModel.getAccessToken(), Toast.LENGTH_SHORT).show();
 
             }

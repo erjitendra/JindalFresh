@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.auth.LoginActivity;
 import com.example.android.jindalfresh.cart.CartItemView;
 import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
@@ -73,10 +74,17 @@ public class HomeFragment extends Fragment {
         cartCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+                if (hasToken()) {
+
+
                 Intent in = new Intent(getActivity(), CartItemView.class);
-                startActivity(in);
+                    startActivity(in);
+                } else {
+                    Intent in = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(in);
+                }
             }
+
         });
 
 
@@ -142,6 +150,10 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
         return rootView;
+    }
+
+    public boolean hasToken() {
+        return true;
     }
 
 
