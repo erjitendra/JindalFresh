@@ -59,5 +59,12 @@ public class UserTokenModel {
         this.scope = scope;
     }
 
+    public boolean hasToken() {
+        if (accessToken != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

@@ -2,6 +2,8 @@ package com.example.android.jindalfresh.generic;
 
 import com.example.android.jindalfresh.app_activities.auth.UserTokenModel;
 import com.example.android.jindalfresh.cart.CartItemHandler;
+import com.example.android.jindalfresh.database.DBHelper;
+import android.content.Context;
 
 public class AppData {
 
@@ -27,8 +29,10 @@ public class AppData {
 
     public static CartItemHandler cartItemHandler;
 
-    public static void initiateAppData() {
+    public static void initiateAppData(Context context) {
         setCartItemHanlder(new CartItemHandler());
+        DBHelper dbHelper = new DBHelper(context);
+        userModelToken.setAccessToken(dbHelper.getLatestToken());
     }
 
     public static CartItemHandler getCartItemHandler() {
