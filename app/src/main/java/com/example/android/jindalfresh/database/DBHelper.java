@@ -1,9 +1,9 @@
 package com.example.android.jindalfresh.database;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.content.Context;
 
 import com.example.android.jindalfresh.app_activities.auth.UserTokenModel;
 
@@ -17,16 +17,22 @@ public class DBHelper {
 
 
     public String getLatestToken() {
-        String token=null;
-        SQLiteDatabase db = dbCreator.getReadableDatabase();
-        String selectQuerySQLCommand = "SELECT * FROM " + UserDataTable.TABLE_NAME + " ORDER BY token_number DESC LIMIT 1";
-        Cursor cursor = db.rawQuery(selectQuerySQLCommand, null);
-        if(cursor.moveToFirst()) {
+        String token = null;
+        String token1 = null;
+        try {
+            SQLiteDatabase db = dbCreator.getReadableDatabase();
+            String selectQuerySQLCommand = "SELECT * FROM " + UserDataTable.TABLE_NAME + " ORDER BY _id DESC LIMIT 1";
+            Cursor cursor = db.rawQuery(selectQuerySQLCommand, null);
+            if (cursor.moveToFirst()) {
 
-            token  =  cursor.getString(cursor.getColumnIndex(UserDataTable.COLUMN_TOKEN_NO));
+                token = cursor.getString(cursor.getColumnIndex(UserDataTable.COLUMN_TOKEN_NO));
 
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        cursor.close();
         return token;
     }
 
