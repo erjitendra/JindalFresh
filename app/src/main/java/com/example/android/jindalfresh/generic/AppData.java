@@ -15,7 +15,7 @@ public class AppData {
     public static String CLIENT_SECRET = "3WDCGYCjvOhNGZzmpWQSXvw6ouoxo6EHqajxJlzawjnHS3IKYMHPSy7GVmza4t3HVcvf7jkKzs75PLQiop4w4IgWF1j30rcmIVgne2UoHfsOhTl2YSA9761Dktgaw4cr";
     public static String GRANT_TYPE = "password";
 
-    public static UserTokenModel userModelToken;
+    public static UserTokenModel userModelToken=new UserTokenModel();
 
     public static UserTokenModel getUserModelToken() {
         return userModelToken;
@@ -32,7 +32,8 @@ public class AppData {
     public static void initiateAppData(Context context) {
         setCartItemHanlder(new CartItemHandler());
         DBHelper dbHelper = new DBHelper(context);
-        userModelToken.setAccessToken(dbHelper.getLatestToken());
+        String token = dbHelper.getLatestToken();
+        userModelToken.setAccessToken(token);
     }
 
     public static CartItemHandler getCartItemHandler() {

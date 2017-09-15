@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment {
     }
 
     public boolean hasToken() {
-        return true;
+        return AppData.getUserModelToken().hasToken();
     }
 
 

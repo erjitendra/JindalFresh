@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentStart();
         setUpNavigation();
 
-        AppData.initiateAppData();
+        AppData.initiateAppData(this);
 
     }
 
