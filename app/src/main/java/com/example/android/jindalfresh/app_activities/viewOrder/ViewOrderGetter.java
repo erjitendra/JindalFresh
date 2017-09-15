@@ -1,15 +1,23 @@
 package com.example.android.jindalfresh.app_activities.viewOrder;
 
 import com.example.android.jindalfresh.product.Product;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ViewOrderGetter implements Serializable {
 
+    @SerializedName("products")
     ArrayList<Product> orderedProducts=new ArrayList<>();
+
+    @SerializedName("total_quantity")
     private String ToatlQuantity;
+
+    @SerializedName("total_price")
     private String ToatlPrice;
+
+    @SerializedName("date_time")
     private String Date;
 
     public ArrayList<Product> getOrderedProducts() {

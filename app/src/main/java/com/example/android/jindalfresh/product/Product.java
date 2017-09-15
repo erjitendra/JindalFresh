@@ -1,5 +1,6 @@
 package com.example.android.jindalfresh.product;
 
+import com.example.android.jindalfresh.generic.AppData;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -110,7 +111,7 @@ public class Product implements Serializable {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = "http://lit-dusk-68336.herokuapp.com" + imageUrl;
+        this.imageUrl = AppData.BASE_URL + imageUrl;
     }
 
     public String getEngName() {

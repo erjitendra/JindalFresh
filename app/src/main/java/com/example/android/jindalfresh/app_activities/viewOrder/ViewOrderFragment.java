@@ -1,7 +1,6 @@
 package com.example.android.jindalfresh.app_activities.viewOrder;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,30 +9,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.generic.AppData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ViewOrderFragment extends Fragment {
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
-    private ArrayList<ViewOrderGetter> listItems = new ArrayList<>();
+    private List<ViewOrderGetter> listItems;
 
     public ViewOrderFragment() {
     }
@@ -46,71 +39,40 @@ public class ViewOrderFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //*******************************************
-        //test git commands: adding this comment by DJ
 
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading Data....");
-        progressDialog.show();
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(AppData.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlData,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        progressDialog.dismiss();
-                        try {
-                            JSONArray OrderArray = new JSONArray(s);
+        Retrofit retrofit = builder.build();
 
-                            for (int index = 0; index <= OrderArray.length(); index++) {
-                                JSONObject orderObject = OrderArray.getJSONObject(index);
+        OrderClient client = retrofit.create(OrderClient.class);
 
-                                ViewOrderGetter orderItem = new ViewOrderGetter();
+//        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
+        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
 
-                                orderItem.setDate(orderObject.getString("date_time"));
-                                orderItem.setToatlPrice(orderObject.getString("total_price"));
-                                orderItem.setToatlQuantity(orderObject.getString("total_quantity"));
+        Call<List<ViewOrderGetter>> call = client.getOrders(accessToken);
 
-                                     ArrayList<Product> orderedProducts = new ArrayList<>();
-                                    JSONArray productArray = orderObject.getJSONArray("products");
-
-                                    for (int productIndex = 0; productIndex < productArray.length(); productIndex++) {
-
-                                        JSONObject productObject = productArray.getJSONObject(productIndex);
-//
-                                        Product productItem = new Product();
-
-                                        productItem.setEngName(productObject.getString("name"));
-                                        productItem.setHindiName(productObject.getString("hindi_name"));
-                                        productItem.setImageUrl(productObject.getString("image_path"));
-                                        productItem.setRate(productObject.getInt("rate"));
-                                        productItem.setUnit(productObject.getString("unit"));
-                                        productItem.setTotalQuantity(productObject.getInt("quantity"));
-//
-                                        orderedProducts.add(productItem);
-                                    }
-
-                                    orderItem.setOrderedProducts(orderedProducts);
-
-                                listItems.add(orderItem);
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        adapter = new ViewOrdersAdapter(listItems, getContext());
-                        recyclerView.setAdapter(adapter);
-                    }
-                }, new Response.ErrorListener() {
+        call.enqueue(new Callback<List<ViewOrderGetter>>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            public void onResponse(Call<List<ViewOrderGetter>> call, retrofit2.Response<List<ViewOrderGetter>> response) {
+                Toast.makeText(getContext(), "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+
+                listItems = response.body();
+                Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getImageUrl());
+                adapter = new ViewOrdersAdapter(listItems, getContext());
+                recyclerView.setAdapter(adapter);
+
             }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
+
+            @Override
+            public void onFailure(Call<List<ViewOrderGetter>> call, Throwable t) {
+
+                Toast.makeText(getContext(), "Failed, went wrong" + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
         return rootView;
     }
