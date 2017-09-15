@@ -75,9 +75,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (hasToken()) {
-
-
-                Intent in = new Intent(getActivity(), CartItemView.class);
+                    Log.v("Mumbai", AppData.getUserModelToken().getAccessToken());
+                    Intent in = new Intent(getActivity(), CartItemView.class);
                     startActivity(in);
                 } else {
                     Intent in = new Intent(getActivity(), LoginActivity.class);
