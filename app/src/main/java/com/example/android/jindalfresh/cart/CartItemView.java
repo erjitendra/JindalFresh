@@ -1,6 +1,7 @@
 package com.example.android.jindalfresh.cart;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.home.HomeFragment;
 import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 
@@ -91,7 +93,9 @@ public class CartItemView extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
 
-                Toast.makeText(CartItemView.this, "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartItemView.this, "Order was successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, HomeFragment.class);
+                startActivity(intent);
 
             }
 

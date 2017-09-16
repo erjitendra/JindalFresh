@@ -1,5 +1,7 @@
 package com.example.android.jindalfresh.app_activities.auth;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
+    Context context = this;
     private DBHelper dbHelper;
 
     private EditText editTextEmail;
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button LoginButton = (Button) findViewById(R.id.button_login_login);
+        Button SignupButton = (Button) findViewById(R.id.button_login_signup);
 
         editTextEmail = (EditText) findViewById(R.id.editText_login_email);
         editTextPassword = (EditText) findViewById(R.id.editText_login_password);
@@ -49,6 +53,16 @@ public class LoginActivity extends AppCompatActivity {
                 sendNetworkRequest();
             }
         });
+
+        SignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
