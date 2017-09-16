@@ -35,6 +35,19 @@ public class DBHelper {
         return token;
     }
 
+    public void deleteTokens() {
+        //Open the database
+        SQLiteDatabase database = dbCreator.getWritableDatabase();
+
+        //Execute sql query to remove from database
+        //NOTE: When removing by String in SQL, value must be enclosed with ''
+        database.execSQL("DELETE FROM " + UserDataTable.TABLE_NAME);
+
+        //Close the database
+        database.close();
+    }
+
+
     public void insertTokenInDb(UserTokenModel userTokenModel, String email) {
         SQLiteDatabase db = dbCreator.getWritableDatabase();
 

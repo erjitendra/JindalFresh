@@ -14,13 +14,17 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.auth.LoginActivity;
 import com.example.android.jindalfresh.app_activities.auth.LoginFragment;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
 import com.example.android.jindalfresh.app_activities.viewOrder.ViewOrderFragment;
+import com.example.android.jindalfresh.database.DBHelper;
 import com.example.android.jindalfresh.generic.AppData;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DBHelper dbHelper= new DBHelper(this);
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -123,8 +127,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int res_id = item.getItemId();
-        if (res_id == R.id.action_setting) {
-            Toast.makeText(getApplicationContext(), "You select Setting", Toast.LENGTH_LONG).show();
+        if (res_id == R.id.action_logout) {
+            dbHelper.deleteTokens();
+
+            if (AppData.getUserModelToken().hasToken()) {
+                Toast.makeText(this, "Failed to logout" , Toast.LENGTH_SHORT).show();
+
+            }
+             else {
+                Toast.makeText(this, "Successfully logged out" , Toast.LENGTH_SHORT).show();
+            }
         }
         return true;
     }
