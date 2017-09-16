@@ -47,6 +47,29 @@ public class DBHelper {
         database.close();
     }
 
+    public String getEmail() {
+        //Open the database
+
+        String email = null;
+        try {
+            SQLiteDatabase db = dbCreator.getReadableDatabase();
+            String selectQuerySQLCommand = "SELECT * FROM " + UserDataTable.TABLE_NAME + " ORDER BY _id DESC LIMIT 1";
+            Cursor cursor = db.rawQuery(selectQuerySQLCommand, null);
+            if (cursor.moveToFirst()) {
+
+                email = cursor.getString(cursor.getColumnIndex(UserDataTable.COLUMN_USER_EMAIL));
+
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return email;
+
+
+    }
+
 
     public void insertTokenInDb(UserTokenModel userTokenModel, String email) {
         SQLiteDatabase db = dbCreator.getWritableDatabase();

@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
@@ -47,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpNavigation() {
         navigationView = (NavigationView) findViewById(R.id.naviagation_view);
+
+        //navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+
+//View view=navigationView.inflateHeaderView(R.layout.navigation_drawer_header);
+            TextView navigationHeaderTextViewEmail = (TextView)header.findViewById(R.id.navigation_header_text_view_emmail_id);
+
+            navigationHeaderTextViewEmail.setText(dbHelper.getEmail());
+
+
+
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -140,5 +155,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    // ====================================================
+
+
 }
