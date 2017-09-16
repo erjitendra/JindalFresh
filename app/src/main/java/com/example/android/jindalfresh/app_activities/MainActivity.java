@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AppData.initiateAppData(this);
+
         setToolBar();
         fragmentStart();
         setUpNavigation();
-
-        AppData.initiateAppData(this);
 
     }
 
@@ -56,7 +57,13 @@ public class MainActivity extends AppCompatActivity {
 //View view=navigationView.inflateHeaderView(R.layout.navigation_drawer_header);
             TextView navigationHeaderTextViewEmail = (TextView)header.findViewById(R.id.navigation_header_text_view_emmail_id);
 
+        //Log.v("ABCDE",AppData.getUserModelToken().hasToken()+dbHelper.getEmail());
+        if (AppData.getUserModelToken().hasToken()) {
             navigationHeaderTextViewEmail.setText(dbHelper.getEmail());
+
+            Log.v("ABCDE",AppData.getUserModelToken().hasToken()+dbHelper.getEmail());
+        }
+//
 
 
 

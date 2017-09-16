@@ -62,9 +62,15 @@ public class DBHelper {
             }
             cursor.close();
 
+            db.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //Close the database
+
+
         return email;
 
 
