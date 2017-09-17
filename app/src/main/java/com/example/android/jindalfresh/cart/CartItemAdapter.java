@@ -10,17 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.product.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
-    private List<Product> listItems;
+    private List<ProductModel> listItems;
 
     private Context context;
 
-    public CartItemAdapter(List<Product> listItems, Context context) {
+    public CartItemAdapter(List<ProductModel> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
 
@@ -35,7 +35,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final Product listItem = listItems.get(position);
+        final ProductModel listItem = listItems.get(position);
 
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());

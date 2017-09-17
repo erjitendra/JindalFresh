@@ -1,7 +1,6 @@
 package com.example.android.jindalfresh.app_activities.home;
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,45 +10,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.auth.LoginActivity;
 import com.example.android.jindalfresh.cart.CartItemView;
 import com.example.android.jindalfresh.generic.AppData;
-import com.example.android.jindalfresh.product.Product;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.android.jindalfresh.product.ProductClient;
+import com.example.android.jindalfresh.product.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class HomeFragment extends Fragment {
-
-    private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/products/";
-    public Button buttonSubmit;
-    Spinner spinner;
-    ArrayAdapter<CharSequence> adapter1;
+    List<ProductModel> products = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<Product> listItems;
 
 
     public HomeFragment() {
@@ -86,68 +70,31 @@ public class HomeFragment extends Fragment {
 
         });
 
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(AppData.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
 
+        Retrofit retrofit = builder.build();
 
-        listItems = new ArrayList<>();
-
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading Data....");
-        progressDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlData,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        progressDialog.dismiss();
-                        try {
-                            JSONArray productArray = new JSONArray(s);
-
-                            for (int index = 0; index <= productArray.length(); index++) {
-                                JSONObject productObject = productArray.getJSONObject(index);
-
-                                Product productItem = new Product();
-
-                                productItem.setEngName(productObject.getString("name"));
-                                productItem.setProductId(productObject.getString("product_id"));
-                                productItem.setHindiName(productObject.getString("hindi_name"));
-                                productItem.setImageUrl(productObject.getString("image_path"));
-                                productItem.setRate(productObject.getInt("rate"));
-                                productItem.setUnit(productObject.getString("unit"));
-                                productItem.setDefaultQuantity();
-
-                                ArrayList<Integer> quantityInterval = new ArrayList<Integer>();
-                                quantityInterval.add(1);
-                                quantityInterval.add(2);
-                                quantityInterval.add(5);
-                                quantityInterval.add(10);
-                                quantityInterval.add(50);
-
-                                productItem.setQunatityInterval(quantityInterval);
-
-                                listItems.add(productItem);
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        adapter = new ProductAdapter(listItems, getContext());
-                        recyclerView.setAdapter(adapter);
-
-
-                        Log.v("XYZ", "Hi" + recyclerView);
-                    }
-                }, new Response.ErrorListener() {
+        ProductClient client = retrofit.create(ProductClient.class);
+        Call<List<ProductModel>> call = client.fetchProducts();
+        call.enqueue(new Callback<List<ProductModel>>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            public void onResponse(Call<List<ProductModel>> call, retrofit2.Response<List<ProductModel>> response) {
+
+                products = response.body();
+                adapter = new ProductAdapter(products, getContext());
+                recyclerView.setAdapter(adapter);
             }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
+
+            @Override
+            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
+
+                Toast.makeText(getContext(), "Sorry, Product listing failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         return rootView;
     }
 

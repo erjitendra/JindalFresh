@@ -11,17 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.product.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class OrderDetailViewAdapter extends RecyclerView.Adapter<OrderDetailViewAdapter.ViewHolder> {
-    private List<Product> listItems;
+    private List<ProductModel> listItems;
 
     private Context context;
 
-    public OrderDetailViewAdapter(List<Product> listItems, Context context) {
+    public OrderDetailViewAdapter(List<ProductModel> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
 
@@ -36,7 +36,7 @@ public class OrderDetailViewAdapter extends RecyclerView.Adapter<OrderDetailView
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        final Product listItem = listItems.get(position);
+        final ProductModel listItem = listItems.get(position);
 
         Log.v("Mumbai", "in order detail adaptor"+ position);
         Log.v("Mumbai", "in order detail adaptor" + listItem.getCompleteImageUrl());

@@ -1,6 +1,6 @@
 package com.example.android.jindalfresh.app_activities.viewOrder;
 
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.product.ProductModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ViewOrderGetter implements Serializable {
 
     @SerializedName("products")
-    ArrayList<Product> orderedProducts=new ArrayList<>();
+    ArrayList<ProductModel> orderedProducts = new ArrayList<>();
 
     @SerializedName("total_quantity")
     private String ToatlQuantity;
@@ -20,7 +20,7 @@ public class ViewOrderGetter implements Serializable {
     @SerializedName("date_time")
     private String Date;
 
-    public ArrayList<Product> getOrderedProducts() {
+    public ArrayList<ProductModel> getOrderedProducts() {
         return orderedProducts;
     }
 

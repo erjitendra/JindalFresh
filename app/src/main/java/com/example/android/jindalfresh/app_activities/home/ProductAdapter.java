@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.generic.AppData;
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.product.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,11 +25,11 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Spinner spinner;
     ArrayAdapter<Integer> adapter1;
-    private List<Product> listItems;
+    private List<ProductModel> listItems;
     private Context context;
-    private Product listItem;
+    private ProductModel listItem;
 
-    public ProductAdapter(List<Product> listItems, Context context) {
+    public ProductAdapter(List<ProductModel> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
 

@@ -7,32 +7,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Product implements Serializable {
+public class ProductModel implements Serializable {
 
+    @SerializedName("quantity_intervals")
+    private ArrayList<Integer> qunatityInterval;
     @SerializedName("name")
     private String engName;
-
-    private ArrayList<Integer> qunatityInterval;
-
     @SerializedName("hindi_name")
     private String hindiName;
-
     @SerializedName("rate")
     private int rate;
-    private int quantityIntervalValue = 1;
-
-
     @SerializedName("quantity")
     private int totalQuantity;
-
     @SerializedName("image_path")
     private String imageUrl;
-
     @SerializedName("unit")
     private String unit;
-
     @SerializedName("product_id")
     private String productId;
+
+    public ProductModel() {
+        setDefaultQuantity();
+    }
 
     public ArrayList<Integer> getQunatityInterval() {
         return qunatityInterval;
@@ -48,15 +44,6 @@ public class Product implements Serializable {
 
     public void setProductId(String productId) {
         this.productId = productId;
-    }
-
-
-    public int getQuantityIntervalValue() {
-        return quantityIntervalValue;
-    }
-
-    public void setQuantityIntervalValue(int quantityIntervalValue) {
-        this.quantityIntervalValue = quantityIntervalValue;
     }
 
 
@@ -84,28 +71,6 @@ public class Product implements Serializable {
         this.totalQuantity = quantityValue;
     }
 
-    public void setDefaultQuantity() {
-        this.totalQuantity = 1;
-    }
-
-    public void doIncrement() {
-        totalQuantity += 1;
-    }
-
-    public int totalPrice() {
-        return totalQuantity * rate;
-    }
-
-    public void doDecrement() {
-        if (totalQuantity > 0) {
-        totalQuantity -= 1;
-        }
-    }
-
-    public void multiplyWithQuantityInterval(int selectedQuantityInterval) {
-        totalQuantity = selectedQuantityInterval * totalQuantity;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -114,9 +79,6 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public String getCompleteImageUrl() {
-        return AppData.BASE_URL + imageUrl;
-    }
 
     public String getEngName() {
         return engName;
@@ -133,5 +95,33 @@ public class Product implements Serializable {
     public void setHindiName(String hindiName) {
         this.hindiName = hindiName;
     }
+
+
+    // ======================Custom methods======================================
+
+    public void setDefaultQuantity() {
+        this.totalQuantity = 1;
+    }
+
+    public String getCompleteImageUrl() {
+        return AppData.BASE_URL + imageUrl;
+    }
+
+
+    public void doIncrement() {
+        totalQuantity += 1;
+    }
+
+    public int totalPrice() {
+        return totalQuantity * rate;
+    }
+
+    public void doDecrement() {
+        if (totalQuantity > 0) {
+            totalQuantity -= 1;
+        }
+    }
+
+
 }
 

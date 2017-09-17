@@ -1,6 +1,6 @@
 package com.example.android.jindalfresh.cart;
 
-import com.example.android.jindalfresh.product.Product;
+import com.example.android.jindalfresh.product.ProductModel;
 
 import java.util.ArrayList;
 
@@ -14,8 +14,8 @@ public interface CartOrderClient {
 
     @Headers("Accept: application/json")
     @POST("v1/product/userorder/")
-    Call<ArrayList<Product>> submitOrder(@Body ArrayList<Product> products,
+    Call<ArrayList<ProductModel>> submitOrder(@Body ArrayList<ProductModel> products,
 
-                                         @Header("Authorization") String accessToken);
+                                              @Header("Authorization") String accessToken);
 
 }

@@ -1,8 +1,7 @@
 package com.example.android.jindalfresh;
+
 import android.util.Log;
 
-import com.example.android.jindalfresh.cart.CartOrderClient;
-import com.example.android.jindalfresh.product.Product;
 import com.example.android.jindalfresh.tests.SampleModel;
 import com.example.android.jindalfresh.tests.SampleModelClient;
 
@@ -16,7 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Djindal on 05-09-2017.
