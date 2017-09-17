@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface CartOrderClient {
 
     @Headers("Accept: application/json")
-    @POST("v1/product/userorder/")
+    @POST("/api/v1/product/userorder/")
     Call<ArrayList<ProductModel>> submitOrder(@Body ArrayList<ProductModel> products,
 
                                               @Header("Authorization") String accessToken);

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    Spinner spinner;
-    ArrayAdapter<Integer> adapter1;
-    private List<ProductModel> listItems;
-    private Context context;
-    private ProductModel listItem;
 
-    public ProductAdapter(List<ProductModel> listItems, Context context) {
-        this.listItems = listItems;
+    private ArrayAdapter<Integer> spinnerQuantityIntervalAdaptor;
+    private List<ProductModel> products;
+    private Context context;
+    private ProductModel product;
+
+    public ProductAdapter(List<ProductModel> products, Context context) {
+        this.products = products;
         this.context = context;
 
     }
@@ -45,36 +44,35 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        listItem = listItems.get(position);
+        product = products.get(position);
 
 
-        holder.textViewEngName.setText(listItem.getEngName());
-        holder.textViewHindiName.setText(listItem.getHindiName());
-        holder.textViewQuantity.setText(Integer.toString(listItem.getTotalQuantity()));
-        holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
-        //holder.textViewSpinnerValue.setText(Integer.toString(listItem.getQuantityIntervalValue()));
+        holder.textViewEngName.setText(product.getEngName());
+        holder.textViewHindiName.setText(product.getHindiName());
+        holder.textViewQuantity.setText(Integer.toString(product.getTotalQuantity()));
+        holder.textViewPrice.setText(Integer.toString(product.totalPrice()));
 
-        Picasso.with(context).load(listItem.getCompleteImageUrl()).into(holder.imageView);
+        Picasso.with(context).load(product.getCompleteImageUrl()).into(holder.imageView);
 
 
         //*********************Spinner*********************************
-        ArrayList<Integer> quantityInterval = listItem.getQunatityInterval();
-        adapter1 = new ArrayAdapter<Integer>(context, android.R.layout.simple_spinner_item, quantityInterval);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.spinner.setAdapter(adapter1);
+        ArrayList<Integer> quantityInterval = product.getQunatityInterval();
+        spinnerQuantityIntervalAdaptor = new ArrayAdapter<Integer>(context, android.R.layout.simple_spinner_item, quantityInterval);
+        spinnerQuantityIntervalAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.spinner.setAdapter(spinnerQuantityIntervalAdaptor);
 
         //*********************Spinner*********************************
 
-        String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
+        String totalQuantityDetail = Integer.toString(product.getTotalQuantity()) + " " + product.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
         holder.buttonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if (!AppData.getCartItemHandler().CheckProductInCart(listItem)) {
+                if (!AppData.getCartItemHandler().CheckProductInCart(product)) {
                     holder.buttonAddToCart.setText("Added");
-                    AppData.getCartItemHandler().setProducts(listItem);
+                    AppData.getCartItemHandler().setProducts(product);
                 } else {
                     Toast.makeText(context, "Already Added", Toast.LENGTH_LONG).show();
                 }
@@ -85,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
 
-                listItem.doIncrement();
+                product.doIncrement();
                 notifyItemChanged(position);
 
             }
@@ -94,7 +92,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
-                listItem.doDecrement();
+                product.doDecrement();
                 notifyItemChanged(position);
             }
         });
@@ -105,11 +103,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return listItems.size();
+        return products.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewEngName, textViewSpinnerValue;
+        public TextView textViewEngName;
         public TextView textViewHindiName;
         public ImageView imageView;
         public TextView textViewQuantity;
@@ -118,7 +116,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public Button buttonAddToCart;
         public TextView textViewPrice;
         public TextView textViewTotalQuantity;
-        public RelativeLayout buttonSubmit;
         public Spinner spinner;
 
         public ViewHolder(View itemView) {
@@ -133,10 +130,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
             buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
             spinner = (Spinner) itemView.findViewById(R.id.spinner);
-            //textViewSpinnerValue=(TextView)itemView.findViewById(R.id.spinnerValue);
-
-
-
         }
 
 

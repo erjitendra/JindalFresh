@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         cartCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hasToken()) {
+                if (AppData.getUserModelToken().hasToken()) {
                     Log.v("Mumbai", AppData.getUserModelToken().getAccessToken());
                     Intent in = new Intent(getActivity(), CartItemView.class);
                     startActivity(in);
@@ -96,10 +96,6 @@ public class HomeFragment extends Fragment {
         });
 
         return rootView;
-    }
-
-    public boolean hasToken() {
-        return AppData.getUserModelToken().hasToken();
     }
 
 

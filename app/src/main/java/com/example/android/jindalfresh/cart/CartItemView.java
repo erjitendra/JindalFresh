@@ -3,7 +3,6 @@ package com.example.android.jindalfresh.cart;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CartItemView extends AppCompatActivity {
     Context context = this;
-    FragmentTransaction fragmentTransaction;
     int orderSummeryTotalPrice = 0;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -35,9 +33,6 @@ public class CartItemView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_item_recycler_view);
-
-
-//        cartItemHandler = (CartItemHandler) getIntent().getSerializableExtra("cartHandlerObject");
 
         TextView items = (TextView) findViewById(R.id.cartSummary_total_Items);
         TextView price = (TextView) findViewById(R.id.cartSummary_total_Price);
@@ -63,12 +58,8 @@ public class CartItemView extends AppCompatActivity {
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String REGISTER_URL = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
-
                 ArrayList<ProductModel> products = AppData.getCartItemHandler().getCartItems();
                 sendNetworkRequest(products);
-
 
             }
         });
@@ -77,36 +68,25 @@ public class CartItemView extends AppCompatActivity {
     private void sendNetworkRequest(ArrayList<ProductModel> products) {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://lit-dusk-68336.herokuapp.com/api/")
+                .baseUrl(AppData.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
-
         Retrofit retrofit = builder.build();
-
         CartOrderClient client = retrofit.create(CartOrderClient.class);
 
-//        String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
         String accessToken = "Bearer " + AppData.getUserModelToken().getAccessToken();
-
         Call<ArrayList<ProductModel>> call = client.submitOrder(products, accessToken);
 
         call.enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, retrofit2.Response<ArrayList<ProductModel>> response) {
-
-                Toast.makeText(CartItemView.this, "Successful" + response.body(), Toast.LENGTH_SHORT).show();
-
-//                Toast.makeText(CartItemView.this, "Order was successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartItemView.this, "Successfully ordered", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
-
-
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
                 Toast.makeText(CartItemView.this, "Failed, went wrong" + t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
 
