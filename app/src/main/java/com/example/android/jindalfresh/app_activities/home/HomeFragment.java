@@ -1,6 +1,7 @@
 package com.example.android.jindalfresh.app_activities.home;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,13 +38,17 @@ public class HomeFragment extends Fragment {
 
 
     public HomeFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading Data....");
+        progressDialog.setContentView(R.layout.progress_screen);
+        progressDialog.show();
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -70,6 +75,7 @@ public class HomeFragment extends Fragment {
 
         });
 
+
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(AppData.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -78,13 +84,16 @@ public class HomeFragment extends Fragment {
 
         ProductClient client = retrofit.create(ProductClient.class);
         Call<List<ProductModel>> call = client.fetchProducts();
+
         call.enqueue(new Callback<List<ProductModel>>() {
             @Override
             public void onResponse(Call<List<ProductModel>> call, retrofit2.Response<List<ProductModel>> response) {
-
+                progressDialog.dismiss();
                 products = response.body();
+                Log.v("Pune", "" + products);
                 adapter = new ProductAdapter(products, getContext());
                 recyclerView.setAdapter(adapter);
+
             }
 
             @Override

@@ -1,5 +1,7 @@
 package com.example.android.jindalfresh.app_activities.auth;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 public class UserTokenModel {
@@ -20,6 +22,8 @@ public class UserTokenModel {
     String scope;
 
     public String getAccessToken() {
+
+        Log.v("APP_Logs", accessToken);
         return accessToken;
     }
 
@@ -60,11 +64,7 @@ public class UserTokenModel {
     }
 
     public boolean hasToken() {
-        if (accessToken != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return accessToken != null;
     }
 
 }

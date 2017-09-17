@@ -57,15 +57,20 @@ public class ViewOrderFragment extends Fragment {
         call.enqueue(new Callback<List<ViewOrderGetter>>() {
             @Override
             public void onResponse(Call<List<ViewOrderGetter>> call, retrofit2.Response<List<ViewOrderGetter>> response) {
-                Toast.makeText(getContext(), "Successful" + response.body(), Toast.LENGTH_SHORT).show();
-                Log.v("Pune", "" + listItems);
 
-                listItems = response.body();
-                Log.v("Pune", "" + listItems);
-                Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getCompleteImageUrl());
-                adapter = new ViewOrdersAdapter(listItems, getContext());
-                recyclerView.setAdapter(adapter);
+                if (response.body() != null) {
+                    Toast.makeText(getContext(), "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+                    Log.v("Pune", "" + listItems);
 
+                    listItems = response.body();
+                    Log.v("Pune", "" + listItems);
+                    Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getCompleteImageUrl());
+                    adapter = new ViewOrdersAdapter(listItems, getContext());
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "No orders", Toast.LENGTH_SHORT).show();
+
+                }
             }
 
             @Override

@@ -14,8 +14,9 @@ import java.util.ArrayList;
 
 public class OrderDetailView extends AppCompatActivity {
     Context context = this;
-    ViewOrderGetter orderItem;
     int orderSummeryTotalPrice = 0;
+    ArrayList<ProductModel> orderedProducts;
+    private ViewOrderGetter orderItem;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
@@ -25,7 +26,7 @@ public class OrderDetailView extends AppCompatActivity {
         setContentView(R.layout.order_detail_recycler_view);
 
         orderItem = (ViewOrderGetter) getIntent().getSerializableExtra("orderItem");
-        ArrayList<ProductModel> orderedProducts = orderItem.getOrderedProducts();
+        orderedProducts = orderItem.getOrderedProducts();
 
         recyclerView = (RecyclerView) findViewById(R.id.orderDetail_recyclerView);
         recyclerView.setHasFixedSize(true);
