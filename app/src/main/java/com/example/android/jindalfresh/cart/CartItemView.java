@@ -93,7 +93,9 @@ public class CartItemView extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
 
-                Toast.makeText(CartItemView.this, "Order was successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartItemView.this, "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(CartItemView.this, "Order was successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
 

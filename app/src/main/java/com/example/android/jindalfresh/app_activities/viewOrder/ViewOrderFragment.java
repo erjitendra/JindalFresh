@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.generic.AppData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,7 +27,7 @@ public class ViewOrderFragment extends Fragment {
     private static final String urlData = "http://lit-dusk-68336.herokuapp.com/api/v1/product/userorder/";
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
-    private List<ViewOrderGetter> listItems;
+    private List<ViewOrderGetter> listItems = new ArrayList<>();
 
     public ViewOrderFragment() {
     }
@@ -57,9 +58,11 @@ public class ViewOrderFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ViewOrderGetter>> call, retrofit2.Response<List<ViewOrderGetter>> response) {
                 Toast.makeText(getContext(), "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+                Log.v("Pune", "" + listItems);
 
                 listItems = response.body();
-                Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getImageUrl());
+                Log.v("Pune", "" + listItems);
+                Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getCompleteImageUrl());
                 adapter = new ViewOrdersAdapter(listItems, getContext());
                 recyclerView.setAdapter(adapter);
 

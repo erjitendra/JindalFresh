@@ -39,11 +39,13 @@ public class OrderDetailViewAdapter extends RecyclerView.Adapter<OrderDetailView
         final Product listItem = listItems.get(position);
 
         Log.v("Mumbai", "in order detail adaptor"+ position);
+        Log.v("Mumbai", "in order detail adaptor" + listItem.getCompleteImageUrl());
 
         holder.textViewEngName.setText(listItem.getEngName());
         holder.textViewHindiName.setText(listItem.getHindiName());
         holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
-        Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
+
+        Picasso.with(context).load(listItem.getCompleteImageUrl()).into(holder.imageView);
         String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
     }

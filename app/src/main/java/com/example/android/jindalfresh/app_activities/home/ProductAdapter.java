@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.textViewPrice.setText(Integer.toString(listItem.totalPrice()));
         //holder.textViewSpinnerValue.setText(Integer.toString(listItem.getQuantityIntervalValue()));
 
-        Picasso.with(context).load(listItem.getImageUrl()).into(holder.imageView);
+        Picasso.with(context).load(listItem.getCompleteImageUrl()).into(holder.imageView);
 
 
         //*********************Spinner*********************************

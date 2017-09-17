@@ -111,7 +111,11 @@ public class Product implements Serializable {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = AppData.BASE_URL + imageUrl;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getCompleteImageUrl() {
+        return AppData.BASE_URL + imageUrl;
     }
 
     public String getEngName() {
