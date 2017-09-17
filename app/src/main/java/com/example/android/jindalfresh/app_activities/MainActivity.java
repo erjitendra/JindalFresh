@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.app_activities.auth.LoginActivity;
 import com.example.android.jindalfresh.app_activities.auth.LoginFragment;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
 import com.example.android.jindalfresh.app_activities.share.ShareFragment;
@@ -27,13 +26,12 @@ import com.example.android.jindalfresh.generic.AppData;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DBHelper dbHelper= new DBHelper(this);
-
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
+    private DBHelper dbHelper = new DBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout, new ShareFragment());
                         fragmentTransaction.commit();
+
+
                         getSupportActionBar().setTitle("Share");
                         item.setChecked(true);
                         drawerLayout.closeDrawer(navigationView);
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int res_id = item.getItemId();
         if (res_id == R.id.action_logout) {
+
             dbHelper.deleteTokens();
 
             if (AppData.getUserModelToken().hasToken()) {

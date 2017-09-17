@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.app_activities.home.HomeFragment;
+import com.example.android.jindalfresh.app_activities.MainActivity;
 import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.Product;
 
@@ -27,9 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CartItemView extends AppCompatActivity {
     Context context = this;
     FragmentTransaction fragmentTransaction;
+    int orderSummeryTotalPrice = 0;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    int orderSummeryTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +94,9 @@ public class CartItemView extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Product>> call, retrofit2.Response<ArrayList<Product>> response) {
 
                 Toast.makeText(CartItemView.this, "Order was successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, HomeFragment.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
+
 
             }
 

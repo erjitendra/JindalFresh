@@ -16,6 +16,12 @@ public class ShareFragment extends Fragment {
     public ShareFragment() {
         // Required empty public constructor
     }
+//
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_share);
+//    }
 
 
     @Override
