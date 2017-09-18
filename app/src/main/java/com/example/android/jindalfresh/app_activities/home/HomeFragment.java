@@ -45,15 +45,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading Data....");
-        progressDialog.setContentView(R.layout.progress_screen);
-        progressDialog.show();
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+//        progressDialog.setMessage("Loading Data....");
+//        //progressDialog;
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_screen);
+
 
 
         RelativeLayout cartCheckout = (RelativeLayout) rootView.findViewById(R.id.cart_checkout);

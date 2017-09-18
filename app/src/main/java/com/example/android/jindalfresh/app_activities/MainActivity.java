@@ -1,5 +1,6 @@
 package com.example.android.jindalfresh.app_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -88,11 +89,13 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(navigationView);
                         break;
                     case R.id.share:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new ShareFragment());
-                        fragmentTransaction.commit();
+//                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.frame_layout, new ShareFragment());
+//                        fragmentTransaction.commit();
 
-
+                        Intent intent = new Intent(MainActivity.this, ShareFragment.class);
+                        startActivity(intent);
+                        getSupportActionBar().isShowing();
                         getSupportActionBar().setTitle("Share");
                         item.setChecked(true);
                         drawerLayout.closeDrawer(navigationView);
