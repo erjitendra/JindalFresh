@@ -52,11 +52,11 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-//        progressDialog.setMessage("Loading Data....");
-//        //progressDialog;
+        progressDialog.setMessage("Loading Data....");
+        //progressDialog;
         progressDialog.setIndeterminate(true);
         progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_screen);
+//        progressDialog.setContentView(R.layout.progress_screen);
 
 
 

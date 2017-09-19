@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/delivery_date_LL_rootView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/deliveryDate_textViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/deliveryDate_textViewTime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
