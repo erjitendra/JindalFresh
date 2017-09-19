@@ -27,6 +27,13 @@ public class CartItemHandler implements Serializable {
 
     }
 
+    public void removeProducts(ProductModel Products) {
+
+        cartItems.remove(Products);
+        updateCartSummaryText();
+
+    }
+
     public int getCartsize() {
 
         return cartItems.size();

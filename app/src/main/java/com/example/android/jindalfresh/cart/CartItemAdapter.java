@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +44,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         Picasso.with(context).load(listItem.getCompleteImageUrl()).into(holder.imageView);
         String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
+        holder.imageViewDeleteItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listItems.remove(listItem);
+                AppData.getCartItemHandler().updateCartSummaryText();
+                notifyItemRemoved(position);
+
+
+            }
+        });
     }
 
 
@@ -55,6 +66,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         public TextView textViewEngName;
         public TextView textViewHindiName;
         public ImageView imageView;
+        public ImageView imageViewDeleteItem;
         public TextView textViewPrice;
         public TextView textViewTotalQuantity;
 
@@ -63,6 +75,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
             textViewHindiName = (TextView) itemView.findViewById(R.id.cartItem_textViewHindiName);
             textViewEngName = (TextView) itemView.findViewById(R.id.cartItem_textViewEngName);
             imageView = (ImageView) itemView.findViewById(R.id.cartItem_ImageView);
+            imageViewDeleteItem = (ImageView) itemView.findViewById(R.id.imageView_cartItem_delete);
             textViewPrice = (TextView) itemView.findViewById(R.id.cartItem_TotalPrice);
             textViewTotalQuantity = (TextView) itemView.findViewById(R.id.cartItem_TotalQuantity);
         }

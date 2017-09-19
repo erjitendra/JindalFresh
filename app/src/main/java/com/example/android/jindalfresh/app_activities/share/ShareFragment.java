@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.android.jindalfresh.R;
+
 
 
 public class ShareFragment extends AppCompatActivity {
@@ -15,11 +15,23 @@ public class ShareFragment extends AppCompatActivity {
         // Required empty public constructor
     }
 
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_share);
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(myToolbar);
+//
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_share);
+
     }
+
+
     //
 //    @Override
 //    protected void onCreate(@Nullable Bundle savedInstanceState) {

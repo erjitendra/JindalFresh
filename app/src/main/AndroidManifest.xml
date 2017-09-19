@@ -36,6 +36,7 @@
         <activity android:name=".app_activities.auth.LoginActivity" />
         <activity
             android:name=".app_activities.share.ShareFragment"
+            android:parentActivityName=".app_activities.MainActivity"
             android:theme="@style/AppTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

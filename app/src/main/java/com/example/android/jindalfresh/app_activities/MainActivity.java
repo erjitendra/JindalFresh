@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Home");
                         item.setChecked(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
                         drawerLayout.closeDrawer(navigationView);
                         break;
                     case R.id.search:
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Search");
                         item.setChecked(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
                         drawerLayout.closeDrawer(navigationView);
                         break;
                     case R.id.share:
