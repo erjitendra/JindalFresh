@@ -13,15 +13,10 @@ import com.example.android.jindalfresh.R;
 
 import java.util.List;
 
-/**
- * Created by Djindal on 19-09-2017.
- */
-
 public class DeliveryDateAdapter extends RecyclerView.Adapter<DeliveryDateAdapter.ViewHolder> {
 
     private List<DeliveryDateModel> dateTimeList;
     private Context context;
-    private DeliveryDateModel dateTime;
 
     public DeliveryDateAdapter(List<DeliveryDateModel> dateTimeList, Context context) {
         this.dateTimeList = dateTimeList;
@@ -37,14 +32,18 @@ public class DeliveryDateAdapter extends RecyclerView.Adapter<DeliveryDateAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        dateTime = dateTimeList.get(position);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        DeliveryDateModel dateTime = dateTimeList.get(position);
+
         holder.textViewDate.setText(dateTime.getDate());
         holder.textViewTime.setText(dateTime.getTime());
+
         holder.linearLayoutrootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Your Delivery will Be on" + dateTime.getDate() + dateTime.getTime(), Toast.LENGTH_LONG).show();
+
+                Toast.makeText(context, "Your Delivery will Be on" + dateTimeList.get(position).getDate() + dateTimeList.get(position).getTime(), Toast.LENGTH_LONG).show();
             }
         });
     }
