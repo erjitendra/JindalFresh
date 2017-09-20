@@ -27,7 +27,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app_activities.MainActivity" />
+        <activity android:name=".app_activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".app_activities.auth.RegistrationActivity" />
         <activity android:name=".cart.CartItemView" />
         <activity android:name=".app_activities.viewOrder.OrderDetailView" />
@@ -49,17 +55,14 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MapsActivity" />
+
+
         <activity
             android:name=".SpleshScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name=".app_activities.delivery.deliveryActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".app_activities.payment.PaymentOption"></activity>
     </application>

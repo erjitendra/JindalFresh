@@ -46,8 +46,8 @@ public class deliveryActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.deliveryDate_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        date.add(new DeliveryDateModel("17 Sep", "7:00-9:00"));
-        date.add(new DeliveryDateModel("17 Sep", "9:00-11:00"));
+        date.add(new DeliveryDateModel("17 Sep 7:00-9:00", "7:00-9:00"));
+        date.add(new DeliveryDateModel("17 Sep 9:00-11:00", "9:00-11:00"));
         date.add(new DeliveryDateModel("17 Sep", "11:00-13:00"));
         date.add(new DeliveryDateModel("17 Sep", "17:00-19:00"));
         date.add(new DeliveryDateModel("17 Sep", "19:00-21:00"));
