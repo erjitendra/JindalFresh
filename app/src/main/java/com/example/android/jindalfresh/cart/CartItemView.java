@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.app_activities.MainActivity;
+import com.example.android.jindalfresh.app_activities.delivery.deliveryActivity;
 import com.example.android.jindalfresh.generic.AppData;
 import com.example.android.jindalfresh.product.ProductModel;
 
@@ -80,7 +80,7 @@ public class CartItemView extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, retrofit2.Response<ArrayList<ProductModel>> response) {
                 Toast.makeText(CartItemView.this, "Successfully ordered", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, deliveryActivity.class);
                 startActivity(intent);
             }
 

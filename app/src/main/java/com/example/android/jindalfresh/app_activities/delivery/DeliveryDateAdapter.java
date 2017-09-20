@@ -32,7 +32,7 @@ public class DeliveryDateAdapter extends RecyclerView.Adapter<DeliveryDateAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         DeliveryDateModel dateTime = dateTimeList.get(position);
 
@@ -43,7 +43,7 @@ public class DeliveryDateAdapter extends RecyclerView.Adapter<DeliveryDateAdapte
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Your Delivery will Be on" + dateTimeList.get(position).getDate() + dateTimeList.get(position).getTime(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Your Delivery will Be on" + dateTimeList.get(holder.getAdapterPosition()).getDate() + dateTimeList.get(holder.getAdapterPosition()).getTime(), Toast.LENGTH_LONG).show();
             }
         });
     }
