@@ -11,10 +11,10 @@
 --><!-- Background circle for the magnitude value -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="@color/magnitude1" />
+    <solid android:color="@color/colorPrimary" />
     <size
-        android:width="1066dp"
-        android:height="1066dp"></size>
+        android:width="38dp"
+        android:height="38dp"></size>
 
     <corners android:radius="38dp" />
 </shape>
