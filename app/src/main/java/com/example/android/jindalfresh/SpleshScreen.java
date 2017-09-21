@@ -9,9 +9,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.android.jindalfresh.app_activities.MainActivity;
+import com.example.android.jindalfresh.app_activities.Welcome;
+import com.example.android.jindalfresh.generic.AppData;
 
 public class SpleshScreen extends Activity {
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 4000;
     private ImageView imageLogo;
 
     @Override
@@ -27,10 +29,15 @@ public class SpleshScreen extends Activity {
 
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SpleshScreen.this, MainActivity.class);
-                startActivity(i);
+                if (AppData.getUserModelToken().hasToken()) {
+                    Intent i = new Intent(SpleshScreen.this, MainActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(SpleshScreen.this, Welcome.class);
+                    startActivity(i);
+                }
+
+
 
 
                 finish();
