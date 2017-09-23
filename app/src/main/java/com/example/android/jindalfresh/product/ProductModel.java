@@ -100,7 +100,7 @@ public class ProductModel implements Serializable {
     // ======================Custom methods======================================
 
     public void setDefaultQuantity() {
-        this.totalQuantity = 1;
+        this.totalQuantity = 0;
     }
 
     public String getCompleteImageUrl() {
@@ -113,6 +113,11 @@ public class ProductModel implements Serializable {
     }
 
     public int totalPrice() {
+
+        if (totalQuantity == 0) {
+            return rate;
+        }
+
         return totalQuantity * rate;
     }
 

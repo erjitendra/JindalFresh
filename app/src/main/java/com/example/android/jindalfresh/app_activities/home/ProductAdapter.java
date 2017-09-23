@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.generic.AppData;
@@ -63,27 +62,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         //*********************Spinner*********************************
 
-        String totalQuantityDetail = Integer.toString(product.getTotalQuantity()) + " " + product.getUnit();
-        holder.textViewTotalQuantity.setText(totalQuantityDetail);
-
-
-        holder.buttonAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
-                    holder.buttonAddToCart.setText("Added");
-                    AppData.getCartItemHandler().setProducts(products.get(position));
-                } else {
-                    Toast.makeText(context, "Already Added", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         holder.buttonIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 products.get(position).doIncrement();
+                if (!AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
+                    AppData.getCartItemHandler().setProducts(products.get(position));
+                }
                 notifyItemChanged(position);
 
             }
@@ -91,8 +77,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.buttonDecrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
+
                 products.get(position).doDecrement();
+                if (products.get(position).getTotalQuantity() == 0) {
+                    if (AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
+                        AppData.getCartItemHandler().removeProducts(products.get(position));
+                    }
+
+                }
                 notifyItemChanged(position);
             }
         });
@@ -113,9 +105,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public TextView textViewQuantity;
         public Button buttonIncrement;
         public Button buttonDecrement;
-        public Button buttonAddToCart;
+
         public TextView textViewPrice;
-        public TextView textViewTotalQuantity;
+
         public Spinner spinner;
 
         public ViewHolder(View itemView) {
@@ -125,10 +117,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imageView = (ImageView) itemView.findViewById(R.id.productImageView);
             textViewQuantity = (TextView) itemView.findViewById(R.id.tv_Quantity);
             textViewPrice = (TextView) itemView.findViewById(R.id.TotalPrice);
-            textViewTotalQuantity = (TextView) itemView.findViewById(R.id.TotalQuantity);
+
             buttonIncrement = (Button) itemView.findViewById(R.id.btn_Increment);
             buttonDecrement = (Button) itemView.findViewById(R.id.btn_Decrement);
-            buttonAddToCart = (Button) itemView.findViewById(R.id.btn_AddToCart);
+
             spinner = (Spinner) itemView.findViewById(R.id.spinner);
         }
 
