@@ -20,6 +20,9 @@ public class SpleshScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splesh_screen);
+
+        AppData.initiateAppData(this);
+
         imageLogo = (ImageView) findViewById(R.id.img_jf_logo);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_transition);
         imageLogo.startAnimation(animation);
@@ -36,10 +39,6 @@ public class SpleshScreen extends Activity {
                     Intent i = new Intent(SpleshScreen.this, Welcome.class);
                     startActivity(i);
                 }
-
-
-
-
                 finish();
             }
         }, SPLASH_TIME_OUT);

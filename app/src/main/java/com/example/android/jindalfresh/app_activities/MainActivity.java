@@ -1,6 +1,5 @@
 package com.example.android.jindalfresh.app_activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import com.example.android.jindalfresh.R;
 import com.example.android.jindalfresh.app_activities.auth.LoginFragment;
 import com.example.android.jindalfresh.app_activities.home.HomeFragment;
-import com.example.android.jindalfresh.app_activities.share.ShareFragment;
 import com.example.android.jindalfresh.app_activities.viewOrder.ViewOrderFragment;
 import com.example.android.jindalfresh.database.DBHelper;
 import com.example.android.jindalfresh.generic.AppData;
@@ -38,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AppData.initiateAppData(this);
 
         setToolBar();
         fragmentStart();
@@ -90,18 +86,6 @@ public class MainActivity extends AppCompatActivity {
                         getSupportActionBar().setHomeButtonEnabled(true);
                         drawerLayout.closeDrawer(navigationView);
                         break;
-                    case R.id.share:
-//                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                        fragmentTransaction.replace(R.id.frame_layout, new ShareFragment());
-//                        fragmentTransaction.commit();
-
-                        Intent intent = new Intent(MainActivity.this, ShareFragment.class);
-                        startActivity(intent);
-                        getSupportActionBar().isShowing();
-                        getSupportActionBar().setTitle("Share");
-                        item.setChecked(true);
-                        drawerLayout.closeDrawer(navigationView);
-                        break;
                     case R.id.setting:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout, new LoginFragment());
@@ -110,6 +94,21 @@ public class MainActivity extends AppCompatActivity {
                         item.setChecked(true);
                         drawerLayout.closeDrawer(navigationView);
                         break;
+
+                    case R.id.action_logout:
+                        if (AppData.getUserModelToken().hasToken()) {
+                            boolean logoutStatus = dbHelper.deleteTokens();
+                            if (logoutStatus) {
+                                Toast.makeText(getBaseContext(), "Successfully logged out", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Failed to logout", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please loging in", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
 
                 }
                 return true;
@@ -153,19 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int res_id = item.getItemId();
-        if (res_id == R.id.action_logout) {
-
-            dbHelper.deleteTokens();
-
-            if (AppData.getUserModelToken().hasToken()) {
-                Toast.makeText(this, "Failed to logout" , Toast.LENGTH_SHORT).show();
-
-            }
-             else {
-                Toast.makeText(this, "Successfully logged out" , Toast.LENGTH_SHORT).show();
-            }
-        }
         return true;
     }
 

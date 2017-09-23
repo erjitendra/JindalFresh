@@ -91,7 +91,6 @@
         android:layout_weight="1"
         android:background="#315f7e"
         android:gravity="center"
-        android:text="Continue"
         android:textColor="#FFFFFF"
         android:textSize="22sp" />
 

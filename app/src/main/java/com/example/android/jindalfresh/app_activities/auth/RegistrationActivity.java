@@ -19,11 +19,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistrationActivity extends AppCompatActivity {
+    Context context = this;
     private EditText editTextFirstName;
     private EditText editTextLastName;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,9 @@ public class RegistrationActivity extends AppCompatActivity {
         call.enqueue(new Callback<SignUpModel>() {
             @Override
             public void onResponse(Call<SignUpModel> call, Response<SignUpModel> response) {
-                Toast.makeText(RegistrationActivity.this, "Successful" + response.body(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
             }
 
             @Override

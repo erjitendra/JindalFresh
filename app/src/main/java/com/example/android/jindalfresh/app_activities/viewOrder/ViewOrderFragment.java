@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,17 +58,11 @@ public class ViewOrderFragment extends Fragment {
             public void onResponse(Call<List<ViewOrderGetter>> call, retrofit2.Response<List<ViewOrderGetter>> response) {
 
                 if (response.body() != null) {
-                    Toast.makeText(getContext(), "Successful" + response.body(), Toast.LENGTH_SHORT).show();
-                    Log.v("Pune", "" + listItems);
-
                     listItems = response.body();
-                    Log.v("Pune", "" + listItems);
-                    Log.v("Mumbai", listItems.get(0).getOrderedProducts().get(0).getCompleteImageUrl());
                     adapter = new ViewOrdersAdapter(listItems, getContext());
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "No orders", Toast.LENGTH_SHORT).show();
-
                 }
             }
 

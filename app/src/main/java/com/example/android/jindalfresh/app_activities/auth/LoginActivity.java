@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
+import com.example.android.jindalfresh.app_activities.MainActivity;
 import com.example.android.jindalfresh.database.DBHelper;
 import com.example.android.jindalfresh.generic.AppData;
 
@@ -39,9 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editText_login_email);
         editTextPassword = (EditText) findViewById(R.id.editText_login_password);
         dbHelper = new DBHelper(this);
-
-        Toast.makeText(LoginActivity.this, "Successful" + dbHelper.getLatestToken(), Toast.LENGTH_SHORT).show();
-
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +94,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 dbHelper.insertTokenInDb(userTokenModel, LoginDataHolder.getEmail());
 
-                Toast.makeText(LoginActivity.this, "Successful" + userTokenModel.getAccessToken(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(LoginActivity.this, "Successfully loged in", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
 
             }
 

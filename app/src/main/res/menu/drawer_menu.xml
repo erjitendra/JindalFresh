@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
@@ -9,34 +10,26 @@
             android:id="@+id/search"
             android:icon="@drawable/ic_search"
             android:title="Your orders"></item>
-<item
-            android:id="@+id/share"
-            android:icon="@drawable/ic_share"
-            android:title="Share"></item>
+
 <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_setting"
             android:title="Setting"></item>
+
+        <item
+            android:id="@+id/action_logout"
+            android:icon="@drawable/ic_setting"
+            android:orderInCategory="300"
+            android:title="Logout"
+            app:showAsAction="ifRoom" />
 
 
     </group>
     <item android:title="Social">
         <menu>
 
-        <item
-            android:id="@+id/search_sub"
-            android:icon="@drawable/ic_search"
-            android:title="Search_Sub_menu"></item>
-        <item
-            android:id="@+id/share_sub"
-            android:icon="@drawable/ic_share"
-            android:title="Share_sub_menu"></item>
-        <item
-            android:id="@+id/setting_sub"
-            android:icon="@drawable/ic_setting"
-            android:title="Setting_sub_menu"></item>
 
-            </menu>
+        </menu>
     </item>
 
 

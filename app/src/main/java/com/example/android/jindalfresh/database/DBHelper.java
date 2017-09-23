@@ -35,16 +35,18 @@ public class DBHelper {
         return token;
     }
 
-    public void deleteTokens() {
-        //Open the database
-        SQLiteDatabase database = dbCreator.getWritableDatabase();
+    public boolean deleteTokens() {
+        boolean logoutStatus = true;
 
-        //Execute sql query to remove from database
-        //NOTE: When removing by String in SQL, value must be enclosed with ''
-        database.execSQL("DELETE FROM " + UserDataTable.TABLE_NAME);
+        try {
+            SQLiteDatabase database = dbCreator.getWritableDatabase();
+            database.execSQL("DELETE FROM " + UserDataTable.TABLE_NAME);
+            database.close();
 
-        //Close the database
-        database.close();
+        } catch (Exception e) {
+            logoutStatus = false;
+        }
+        return logoutStatus;
     }
 
     public String getEmail() {
