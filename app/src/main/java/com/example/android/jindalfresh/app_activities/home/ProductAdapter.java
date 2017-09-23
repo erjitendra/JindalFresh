@@ -83,15 +83,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     if (AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
                         AppData.getCartItemHandler().removeProducts(products.get(position));
                     }
-
                 }
                 notifyItemChanged(position);
             }
         });
 
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -105,9 +102,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public TextView textViewQuantity;
         public Button buttonIncrement;
         public Button buttonDecrement;
-
         public TextView textViewPrice;
-
         public Spinner spinner;
 
         public ViewHolder(View itemView) {

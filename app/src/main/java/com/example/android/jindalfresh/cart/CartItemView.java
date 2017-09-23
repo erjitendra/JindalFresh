@@ -25,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CartItemView extends AppCompatActivity {
     Context context = this;
-    int orderSummeryTotalPrice = 0;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
@@ -39,13 +38,8 @@ public class CartItemView extends AppCompatActivity {
         Button paymentButton = (Button) findViewById(R.id.cartSummary_btn_payment);
         items.setText("Items: " + "" + AppData.getCartItemHandler().getCartsize());
 
-
-        for (int i = 0; i < AppData.getCartItemHandler().getCartsize(); i++) {
-            orderSummeryTotalPrice += AppData.getCartItemHandler().getProducts(i).totalPrice();
-        }
-
-        price.setText("Price: " + "" + Integer.toString(orderSummeryTotalPrice) + " Rs");
-        paymentButton.setText("Pay " + "" + Integer.toString(orderSummeryTotalPrice) + " Rs");
+        price.setText("Price: " + "" + Integer.toString(AppData.getCartItemHandler().getCartPrice()) + " Rs");
+        paymentButton.setText("Pay " + "" + Integer.toString(AppData.getCartItemHandler().getCartPrice()) + " Rs");
 
         recyclerView = (RecyclerView) findViewById(R.id.cartItem_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -53,7 +47,6 @@ public class CartItemView extends AppCompatActivity {
 
         adapter = new CartItemAdapter(AppData.getCartItemHandler().getCartItems(), context);
         recyclerView.setAdapter(adapter);
-
 
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override

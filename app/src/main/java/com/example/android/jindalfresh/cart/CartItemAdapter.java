@@ -44,11 +44,12 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         Picasso.with(context).load(listItem.getCompleteImageUrl()).into(holder.imageView);
         String totalQuantityDetail = Integer.toString(listItem.getTotalQuantity()) + " " + listItem.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
+
         holder.imageViewDeleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listItems.remove(listItem);
-                AppData.getCartItemHandler().updateCartSummaryText();
+                listItems.remove(listItems.get(position));
+                AppData.getCartItemHandler().updateCartQuantityNumberText();
                 notifyItemRemoved(position);
 
 

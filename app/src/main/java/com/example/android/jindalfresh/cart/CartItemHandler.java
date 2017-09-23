@@ -13,7 +13,7 @@ public class CartItemHandler implements Serializable {
     
     public void setText_view(TextView cartSummaryTextView) {
         this.cartSummaryTextView = cartSummaryTextView;
-        updateCartSummaryText();
+        updateCartQuantityNumberText();
     }
 
     public ProductModel getProducts(int position) {
@@ -23,20 +23,28 @@ public class CartItemHandler implements Serializable {
     public void setProducts(ProductModel Products) {
 
         cartItems.add(Products);
-        updateCartSummaryText();
+        updateCartQuantityNumberText();
 
     }
 
     public void removeProducts(ProductModel Products) {
 
         cartItems.remove(Products);
-        updateCartSummaryText();
+        updateCartQuantityNumberText();
 
     }
 
     public int getCartsize() {
 
         return cartItems.size();
+    }
+
+    public int getCartPrice() {
+        int orderSummeryTotalPrice = 0;
+        for (int i = 0; i < getCartsize(); i++) {
+            orderSummeryTotalPrice += getProducts(i).totalPrice();
+        }
+        return orderSummeryTotalPrice;
     }
 
     public boolean CheckProductInCart(ProductModel aproduct) {
@@ -48,7 +56,7 @@ public class CartItemHandler implements Serializable {
     }
 
 
-    public void updateCartSummaryText(){
+    public void updateCartQuantityNumberText() {
         cartSummaryTextView.setText(Integer.toString(getCartsize()));
 
     }
