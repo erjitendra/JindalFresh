@@ -3,9 +3,11 @@ package com.example.android.jindalfresh.app_activities.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,11 +42,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return new ViewHolder(v);
     }
 
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position, List payloads) {
+        if (payloads.size() > 0) {
+            product = products.get(position);
+            Log.i(this.getClass().getSimpleName(), "Payload provided" + payloads);
+            holder.textViewQuantity.setText(Integer.toString(product.getTotalQuantity()));
+            holder.textViewPrice.setText(Integer.toString(product.totalPrice()));
+        } else {
+            Log.i(this.getClass().getSimpleName(), "No Payload" + payloads);
+            super.onBindViewHolder(holder, position, payloads);
+        }
+    }
+
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         product = products.get(position);
-
+        product.setDefaultQuantity();
+        product.setDefaultSelectedPackSize();
 
         holder.textViewEngName.setText(product.getEngName());
         holder.textViewHindiName.setText(product.getHindiName());
@@ -60,6 +78,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         spinnerQuantityIntervalAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinner.setAdapter(spinnerQuantityIntervalAdaptor);
 
+        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int spinnerPosition, long id) {
+                products.get(position).setSelectedPackSize((Integer) parent.getItemAtPosition(spinnerPosition));
+                ProductAdapter.this.notifyItemChanged(position, new Boolean(true));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         //*********************Spinner*********************************
 
 
@@ -70,7 +101,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 if (!AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
                     AppData.getCartItemHandler().setProducts(products.get(position));
                 }
-                notifyItemChanged(position);
+                ProductAdapter.this.notifyItemChanged(position, new Boolean(true));
 
             }
         });
@@ -84,7 +115,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         AppData.getCartItemHandler().removeProducts(products.get(position));
                     }
                 }
-                notifyItemChanged(position);
+                ProductAdapter.this.notifyItemChanged(position, new Boolean(true));
             }
         });
 

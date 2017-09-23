@@ -25,9 +25,22 @@ public class ProductModel implements Serializable {
     private String unit;
     @SerializedName("product_id")
     private String productId;
+    private Integer selectedPackSize;
 
     public ProductModel() {
-        setDefaultQuantity();
+
+    }
+
+    public Integer getSelectedPackSize() {
+        return selectedPackSize;
+    }
+
+    public void setSelectedPackSize(Integer selectedPackSize) {
+        this.selectedPackSize = selectedPackSize;
+    }
+
+    public void setDefaultSelectedPackSize() {
+        this.selectedPackSize = getQunatityInterval().get(0);
     }
 
     public ArrayList<Integer> getQunatityInterval() {
@@ -118,7 +131,7 @@ public class ProductModel implements Serializable {
             return rate;
         }
 
-        return totalQuantity * rate;
+        return totalQuantity * rate * selectedPackSize;
     }
 
     public void doDecrement() {
