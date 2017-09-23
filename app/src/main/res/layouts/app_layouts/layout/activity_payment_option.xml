@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
+
             android:text="Items:" />
 
         <TextView
@@ -88,8 +89,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#315f7e"
         android:gravity="center"
-        android:text="Items:" />
+        android:text="Continue"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp" />
 
 
 </LinearLayout>

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.jindalfresh.R;
@@ -14,6 +17,7 @@ public class Welcome extends AppCompatActivity {
     private TextView welcome_login;
     private TextView welcome_signup;
     private TextView welcome_skip;
+    private ImageView welcome_logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,11 @@ public class Welcome extends AppCompatActivity {
         welcome_login = (TextView) findViewById(R.id.welcome_tv_login);
         welcome_signup = (TextView) findViewById(R.id.welcome_tv_sign_up);
         welcome_skip = (TextView) findViewById(R.id.welcome_tv_skip);
+        welcome_logo = (ImageView) findViewById(R.id.welcome_img_jf_logo);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_transition);
+        welcome_logo.startAnimation(animation);
+
+
         welcome_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +52,7 @@ public class Welcome extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
     }
 }

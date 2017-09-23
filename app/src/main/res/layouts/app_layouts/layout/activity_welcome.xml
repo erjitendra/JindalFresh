@@ -6,36 +6,68 @@
     android:orientation="vertical"
     tools:context="com.example.android.jindalfresh.app_activities.Welcome">
 
-    <TextView
-        android:id="@+id/welcome_tv_login"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="5"
         android:gravity="center"
-        android:text="Login"
-        android:textSize="18sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/welcome_tv_sign_up"
+        <ImageView
+            android:id="@+id/welcome_img_jf_logo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+
+
+            android:src="@drawable/jindal_fresh_logo"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Signup"
-        android:textSize="18sp" />
+        android:layout_weight="5"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/welcome_tv_skip"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Skip"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/welcome_tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_red"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7" />
+        <TextView
+            android:id="@+id/welcome_tv_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_red"
+            android:gravity="center"
+            android:text="Signup"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/welcome_tv_skip"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="Skip"
+            android:textColor="#5684a4"
+            android:textSize="22sp" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

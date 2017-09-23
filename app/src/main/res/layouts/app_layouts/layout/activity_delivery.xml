@@ -13,14 +13,25 @@
         android:text="Select Delivery Date" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/deliveryDate_recyclerView"
+    <Spinner
+        android:id="@+id/deliveryDate_spinnerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_weight="1"
         android:padding="5dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </Spinner>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
 
     <LinearLayout
 
