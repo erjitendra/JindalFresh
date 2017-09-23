@@ -4,19 +4,18 @@ import com.example.android.jindalfresh.generic.AppData;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 
 public class ProductModel implements Serializable {
 
     @SerializedName("quantity_intervals")
-    private ArrayList<Integer> qunatityInterval;
+    private PackSizeInterval packSizeIntervals;
+
     @SerializedName("name")
     private String engName;
     @SerializedName("hindi_name")
     private String hindiName;
-    @SerializedName("rate")
-    private int rate;
+
     @SerializedName("quantity")
     private int totalQuantity;
     @SerializedName("image_path")
@@ -25,31 +24,33 @@ public class ProductModel implements Serializable {
     private String unit;
     @SerializedName("product_id")
     private String productId;
-    private Integer selectedPackSize;
+
+    private Integer rateOfSelectedPackSize;
 
     public ProductModel() {
 
     }
 
-    public Integer getSelectedPackSize() {
-        return selectedPackSize;
+    public PackSizeInterval getPackSizeIntervals() {
+        return packSizeIntervals;
     }
 
-    public void setSelectedPackSize(Integer selectedPackSize) {
-        this.selectedPackSize = selectedPackSize;
+    public void setPackSizeIntervals(PackSizeInterval packSizeIntervals) {
+        this.packSizeIntervals = packSizeIntervals;
+    }
+
+    public Integer getRateOfSelectedPackSize() {
+        return rateOfSelectedPackSize;
+    }
+
+    public void setRateOfSelectedPackSize(Integer rateOfSelectedPackSize) {
+        this.rateOfSelectedPackSize = rateOfSelectedPackSize;
     }
 
     public void setDefaultSelectedPackSize() {
-        this.selectedPackSize = getQunatityInterval().get(0);
+        this.rateOfSelectedPackSize = packSizeIntervals.getPackSizeRates().get(0);
     }
 
-    public ArrayList<Integer> getQunatityInterval() {
-        return qunatityInterval;
-    }
-
-    public void setQunatityInterval(ArrayList<Integer> qunatityInterval) {
-        this.qunatityInterval = qunatityInterval;
-    }
 
     public String getProductId() {
         return productId;
@@ -66,14 +67,6 @@ public class ProductModel implements Serializable {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
     }
 
     public int getTotalQuantity() {
@@ -128,10 +121,10 @@ public class ProductModel implements Serializable {
     public int totalPrice() {
 
         if (totalQuantity == 0) {
-            return rate;
+            return rateOfSelectedPackSize;
         }
 
-        return totalQuantity * rate * selectedPackSize;
+        return totalQuantity * rateOfSelectedPackSize;
     }
 
     public void doDecrement() {

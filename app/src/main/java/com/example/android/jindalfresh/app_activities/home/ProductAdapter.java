@@ -24,7 +24,7 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private ArrayAdapter<Integer> spinnerQuantityIntervalAdaptor;
+    private ArrayAdapter<String> spinnerQuantityIntervalAdaptor;
     private List<ProductModel> products;
     private Context context;
     private ProductModel product;
@@ -73,15 +73,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
 
         //*********************Spinner*********************************
-        ArrayList<Integer> quantityInterval = product.getQunatityInterval();
-        spinnerQuantityIntervalAdaptor = new ArrayAdapter<Integer>(context, android.R.layout.simple_spinner_item, quantityInterval);
+        ArrayList<String> packSizeTypes = product.getPackSizeIntervals().getPackSizeTypes();
+        spinnerQuantityIntervalAdaptor = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, packSizeTypes);
         spinnerQuantityIntervalAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinner.setAdapter(spinnerQuantityIntervalAdaptor);
 
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int spinnerPosition, long id) {
-                products.get(position).setSelectedPackSize((Integer) parent.getItemAtPosition(spinnerPosition));
+                Integer rateOfSelectedPackSize = products.get(position).getPackSizeIntervals().getPackSizeRates().get(spinnerPosition);
+                products.get(position).setRateOfSelectedPackSize(rateOfSelectedPackSize);
                 ProductAdapter.this.notifyItemChanged(position, new Boolean(true));
             }
 
