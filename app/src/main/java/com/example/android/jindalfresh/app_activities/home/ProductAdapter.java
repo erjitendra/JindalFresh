@@ -65,14 +65,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         String totalQuantityDetail = Integer.toString(product.getTotalQuantity()) + " " + product.getUnit();
         holder.textViewTotalQuantity.setText(totalQuantityDetail);
+
+
         holder.buttonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                if (!AppData.getCartItemHandler().CheckProductInCart(product)) {
+                if (!AppData.getCartItemHandler().CheckProductInCart(products.get(position))) {
                     holder.buttonAddToCart.setText("Added");
-                    AppData.getCartItemHandler().setProducts(product);
+                    AppData.getCartItemHandler().setProducts(products.get(position));
                 } else {
                     Toast.makeText(context, "Already Added", Toast.LENGTH_LONG).show();
                 }
@@ -83,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
 
-                product.doIncrement();
+                products.get(position).doIncrement();
                 notifyItemChanged(position);
 
             }
@@ -92,7 +92,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, "Position is" + position, Toast.LENGTH_SHORT).show();
-                product.doDecrement();
+                products.get(position).doDecrement();
                 notifyItemChanged(position);
             }
         });
