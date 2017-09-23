@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
 
         RelativeLayout cartCheckout = (RelativeLayout) rootView.findViewById(R.id.cart_checkout);
         TextView cartItems_No_display = (TextView) rootView.findViewById(R.id.cart_items_no_display);
-        AppData.getCartItemHandler().setText_view(cartItems_No_display);
+        AppData.getCartItemHandler().setCartQuantityNumberTextView(cartItems_No_display);
 
         cartCheckout.setOnClickListener(new View.OnClickListener() {
             @Override

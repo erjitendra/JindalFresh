@@ -49,7 +49,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 listItems.remove(listItems.get(position));
-                AppData.getCartItemHandler().updateCartQuantityNumberText();
+                AppData.getCartItemHandler().refreshCartTextViews();
                 notifyItemRemoved(position);
 
 

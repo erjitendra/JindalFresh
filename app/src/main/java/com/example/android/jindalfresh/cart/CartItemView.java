@@ -35,6 +35,10 @@ public class CartItemView extends AppCompatActivity {
 
         TextView items = (TextView) findViewById(R.id.cartSummary_total_Items);
         TextView price = (TextView) findViewById(R.id.cartSummary_total_Price);
+
+        AppData.getCartItemHandler().setCartSummaryPriceTextView(price);
+        AppData.getCartItemHandler().setCartSummaryTotalItemsTextView(items);
+
         Button paymentButton = (Button) findViewById(R.id.cartSummary_btn_payment);
         items.setText("Items: " + "" + AppData.getCartItemHandler().getCartsize());
 
