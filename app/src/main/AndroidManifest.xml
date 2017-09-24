@@ -58,14 +58,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            android:screenOrientation="portrait">
-
         </activity>
-        <activity android:name=".app_activities.delivery.deliveryActivity">
-
-        </activity>
+        <activity android:name=".app_activities.delivery.deliveryActivity" />
         <activity android:name=".app_activities.payment.PaymentOption" />
-        <activity android:name=".app_activities.Welcome"></activity>
+        <activity android:name=".app_activities.Welcome" />
+        <activity android:name=".app_activities.auth.AddressActivity"></activity>
     </application>
 
 </manifest>
