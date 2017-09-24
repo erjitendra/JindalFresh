@@ -41,6 +41,8 @@ public class OrderDetailView extends AppCompatActivity {
         items.setText("Items: " + "" + orderedProducts.size());
 
         for (int i = 0; i < orderedProducts.size(); i++) {
+            ProductModel product = orderedProducts.get(i);
+            product.setDefaultSelectedPackSize();
             orderSummeryTotalPrice += orderedProducts.get(i).totalPrice();
         }
         price.setText("Price: " + "" + Integer.toString(orderSummeryTotalPrice) + " Rs");

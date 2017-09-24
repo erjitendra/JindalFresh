@@ -25,11 +25,8 @@ public class ProductModel implements Serializable {
     @SerializedName("product_id")
     private String productId;
 
+
     private Integer rateOfSelectedPackSize;
-
-    public ProductModel() {
-
-    }
 
     public PackSizeInterval getPackSizeIntervals() {
         return packSizeIntervals;

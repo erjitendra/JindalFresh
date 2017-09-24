@@ -2,10 +2,11 @@ package com.example.android.jindalfresh.product;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class PackSizeInterval {
+public class PackSizeInterval implements Serializable {
     @SerializedName("pack_size_types")
     private ArrayList<String> packSizeTypes;
     @SerializedName("pack_size_rates")
