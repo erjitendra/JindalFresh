@@ -1,5 +1,6 @@
 package com.example.android.jindalfresh.app_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -78,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(navigationView);
                         break;
                     case R.id.search:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, new ViewOrderFragment());
-                        fragmentTransaction.commit();
+//                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.frame_layout, new ViewOrderFragment());
+//                        fragmentTransaction.commit();
+                        Intent intent = new Intent(getBaseContext(), ViewOrderFragment.class);
+                        startActivity(intent);
                         getSupportActionBar().setTitle("Search");
                         item.setChecked(true);
                         getSupportActionBar().setHomeButtonEnabled(true);
