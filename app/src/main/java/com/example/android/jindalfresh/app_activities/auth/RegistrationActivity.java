@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.jindalfresh.R;
@@ -24,6 +25,11 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextLastName;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private TextView editTextAddress;
+    private TextView editTextPhoneNumber;
+    private TextView editTextPhoneNumber2;
+
+    private SignUpModel signUpDataHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,44 @@ public class RegistrationActivity extends AppCompatActivity {
         editTextLastName = (EditText) findViewById(R.id.editText_signup_last_name);
         editTextEmail = (EditText) findViewById(R.id.editText_signup_email);
         editTextPassword = (EditText) findViewById(R.id.editText_signup_password);
+        editTextPhoneNumber = (EditText) findViewById(R.id.editText_signup_phonenumber);
+        editTextPhoneNumber2 = (EditText) findViewById(R.id.editText_signup_phonenumber_2);
+        editTextAddress = (TextView) findViewById(R.id.editText_signup_address);
+
+        editTextAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUpDataHolder = new SignUpModel();
+
+                signUpDataHolder.setFirstName(editTextFirstName.getText().toString());
+                signUpDataHolder.setLastName(editTextLastName.getText().toString());
+                signUpDataHolder.setEmail(editTextEmail.getText().toString());
+                signUpDataHolder.setPassword(editTextPassword.getText().toString());
+                signUpDataHolder.setPhonenumber(editTextPhoneNumber.getText().toString());
+                signUpDataHolder.setPhonenumber_two(editTextPhoneNumber2.getText().toString());
+
+                Intent intent = new Intent(context, AddressActivity.class);
+                intent.putExtra("signUpDataHolder", signUpDataHolder);
+                startActivity(intent);
+            }
+        });
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra("signUpDataHolder")) {
+            signUpDataHolder = (SignUpModel) getIntent().getSerializableExtra("signUpDataHolder");
+
+            editTextFirstName.setText(signUpDataHolder.getFirstName());
+            editTextLastName.setText(signUpDataHolder.getLastName());
+            editTextEmail.setText(signUpDataHolder.getEmail());
+            editTextPassword.setText(signUpDataHolder.getPassword());
+            editTextPhoneNumber.setText(signUpDataHolder.getPhonenumber());
+            editTextPhoneNumber2.setText(signUpDataHolder.getPhonenumber_two());
+
+            editTextAddress.setText(signUpDataHolder.getFullAddress());
+
+
+        }
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,13 +93,6 @@ public class RegistrationActivity extends AppCompatActivity {
         SignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SignUpModel signUpDataHolder = new SignUpModel();
-
-                signUpDataHolder.setFirstName(editTextFirstName.getText().toString());
-                signUpDataHolder.setLastName(editTextLastName.getText().toString());
-                signUpDataHolder.setEmail(editTextEmail.getText().toString());
-                signUpDataHolder.setPassword(editTextPassword.getText().toString());
 
                 sendNetworkRequest(signUpDataHolder);
 
