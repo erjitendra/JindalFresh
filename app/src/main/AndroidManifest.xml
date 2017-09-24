@@ -31,6 +31,7 @@
         <activity android:name=".app_activities.auth.RegistrationActivity" />
         <activity android:name=".cart.CartItemView" />
         <activity android:name=".app_activities.viewOrder.OrderDetailView" />
+        <activity android:name=".app_activities.viewOrder.ViewOrderFragment" />
         <activity android:name=".app_activities.auth.LoginActivity" />
         <activity
             android:name=".app_activities.share.ShareFragment"

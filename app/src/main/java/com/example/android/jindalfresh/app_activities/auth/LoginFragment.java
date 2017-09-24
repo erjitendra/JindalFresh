@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.jindalfresh.R;
-import com.example.android.jindalfresh.cart.CartItemHandler;
 
 public class LoginFragment extends Fragment {
-    private CartItemHandler cart;
+
 
     public LoginFragment() {
     }

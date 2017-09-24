@@ -102,13 +102,18 @@ public class MainActivity extends AppCompatActivity {
                         if (AppData.getUserModelToken().hasToken()) {
                             boolean logoutStatus = dbHelper.deleteTokens();
                             if (logoutStatus) {
+                                AppData.getUserModelToken().setAccessToken(null);
                                 Toast.makeText(getBaseContext(), "Successfully logged out", Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(getBaseContext(), Welcome.class);
+                                startActivity(intent1);
                             } else {
                                 Toast.makeText(getBaseContext(), "Failed to logout", Toast.LENGTH_SHORT).show();
 
                             }
                         } else {
                             Toast.makeText(getBaseContext(), "Please loging in", Toast.LENGTH_SHORT).show();
+                            Intent intent1 = new Intent(getBaseContext(), Welcome.class);
+                            startActivity(intent1);
                         }
                         break;
 
